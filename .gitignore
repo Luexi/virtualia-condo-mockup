@@ -1,0 +1,26 @@
+# IDE and Editor Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Temporary & Build files
+node_modules/
+dist/
+build/
+.vite/
+coverage/
+*.log
+.gemini/
+
+# Local archive metadata
+virtualia-condo-mockup-approved-*
