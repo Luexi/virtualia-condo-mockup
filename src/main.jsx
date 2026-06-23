@@ -7,6 +7,7 @@ import "./styles/layout.css";
 import "./styles/components.css";
 import "./styles/screens.css";
 import "./styles/map.css";
+import "./styles/landing.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>

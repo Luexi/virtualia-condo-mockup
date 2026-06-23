@@ -1,4 +1,6 @@
 export const ROUTE_SYNONYMS = {
+  home: "landing",
+  public: "landing",
   inicio: "dashboard",
   validar: "pagos",
   estado: "estado-cuenta",
@@ -7,6 +9,7 @@ export const ROUTE_SYNONYMS = {
 };
 
 export const ROUTES = [
+  "landing",
   "login",
   "dashboard",
   "mapa",
@@ -53,6 +56,7 @@ export const NAV_GROUPS = [
 ];
 
 export const PAGE_META = {
+  landing: { title: "Condo by Virtualia", sub: "Landing publica de producto." },
   login: { title: "Login", sub: "Acceso privado al panel administrativo." },
   dashboard: { title: "Inicio", sub: "Prioridades operativas de la comunidad." },
   mapa: {
@@ -113,9 +117,9 @@ export function normalizeRoute(route) {
   const cleaned =
     String(route || "")
       .replace(/^#\/?/, "")
-      .replace(/^\//, "") || "login";
+      .replace(/^\//, "") || "landing";
   const normalized = ROUTE_SYNONYMS[cleaned] || cleaned;
-  return ROUTES.includes(normalized) ? normalized : "login";
+  return ROUTES.includes(normalized) ? normalized : "landing";
 }
 
 export function toHash(route) {

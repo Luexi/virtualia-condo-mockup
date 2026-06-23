@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppShell from "./components/AppShell.jsx";
 import AppToast from "./components/AppToast.jsx";
+import LandingScreen from "./screens/LandingScreen.jsx";
 import LoginScreen from "./screens/LoginScreen.jsx";
 import { AccessScreen } from "./screens/AccessScreen.jsx";
 import { AmenitiesScreen } from "./screens/AmenitiesScreen.jsx";
@@ -31,6 +32,10 @@ export default function App() {
 
   const goLogin = () => navigate("login");
   const goDashboard = () => navigate("dashboard");
+
+  if (route === "landing") {
+    return <LandingScreen />;
+  }
 
   if (route === "login") {
     return (

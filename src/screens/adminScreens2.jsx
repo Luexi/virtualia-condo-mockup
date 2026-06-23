@@ -203,7 +203,7 @@ function PaymentsReviewScreen({ tenant, showToast }) {
         <span className="banner__icon"><Ic name="ShieldCheck" size={17} /></span>
         <div>
           <div className="banner__title">Revision manual con trazabilidad visual</div>
-          Aprueba, rechaza o solicita aclaracion sobre comprobantes ficticios. La demo no conecta con bancos ni procesa pagos.
+          Aprueba, rechaza o solicita aclaracion sobre comprobantes ficticios. La demo no conecta servicios externos ni procesa pagos.
         </div>
       </div>
 

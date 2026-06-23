@@ -9,7 +9,7 @@ export function useHashRoute() {
   const [route, setRouteState] = useState(() => readHashRoute());
 
   useEffect(() => {
-    if (!window.location.hash) {
+    if (!window.location.hash && route !== "landing") {
       window.history.replaceState(null, "", toHash(route));
     }
 
