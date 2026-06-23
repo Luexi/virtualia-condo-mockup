@@ -40,6 +40,16 @@ function MapScreen({ tenant, setRoute, setDetail, showToast }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [selected]);
 
+  useEffect(() => {
+    if (!selected || !window.matchMedia("(max-width: 700px)").matches) return;
+    window.requestAnimationFrame(() => {
+      document.querySelector(".map-popover--mobile-sheet")?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    });
+  }, [selected]);
+
   const summary = mapSummary(community.hotspots);
   const toggleOverlay = (id) => setOverlays((current) => ({ ...current, [id]: !current[id] }));
 
@@ -86,17 +96,19 @@ function MapScreen({ tenant, setRoute, setDetail, showToast }) {
     );
   };
 
-  const renderPopover = () => {
+  const renderPopover = (mode = "desktop") => {
     if (!selected) return null;
     const below = selected.yPct < 42;
     const side = selected.xPct > 72 ? " map-popover--align-end" : selected.xPct < 28 ? " map-popover--align-start" : "";
+    const modeClass = mode === "mobile" ? " map-popover--mobile-sheet" : " map-popover--desktop";
+    const positionStyle = mode === "desktop" ? { left: `${selected.xPct}%`, top: `${selected.yPct}%` } : undefined;
 
     if (selected.tipo === "unit") {
       const state = ESTADO_BADGE[selected.estado] || { tone: "slate", label: selected.estado };
       return (
         <div
-          className={`map-popover ${below ? "map-popover--below" : "map-popover--above"}${side}`}
-          style={{ left: `${selected.xPct}%`, top: `${selected.yPct}%` }}
+          className={`map-popover${modeClass} ${below ? "map-popover--below" : "map-popover--above"}${side}`}
+          style={positionStyle}
           onClick={(event) => event.stopPropagation()}
         >
           <div className="map-popover__head">
@@ -166,8 +178,8 @@ function MapScreen({ tenant, setRoute, setDetail, showToast }) {
     const targetRoute = selected.tipo === "gate" ? "accesos" : "amenidades";
     return (
       <div
-        className={`map-popover map-popover--amenity ${below ? "map-popover--below" : "map-popover--above"}${side}`}
-        style={{ left: `${selected.xPct}%`, top: `${selected.yPct}%` }}
+        className={`map-popover map-popover--amenity${modeClass} ${below ? "map-popover--below" : "map-popover--above"}${side}`}
+        style={positionStyle}
         onClick={(event) => event.stopPropagation()}
       >
         <div className="map-popover__head">
@@ -228,7 +240,7 @@ function MapScreen({ tenant, setRoute, setDetail, showToast }) {
         }
         body={false}
       >
-        <div className="map-frame">
+        <div className={`map-frame${selected ? " map-frame--selected" : ""}`}>
           <div className="map-toolbar">
             <div className="map-toolbar__group">
               <span className="map-toolbar__label">Vista</span>
@@ -262,8 +274,9 @@ function MapScreen({ tenant, setRoute, setDetail, showToast }) {
                 if (spot.tipo === "gate") return overlays.accesos ? renderBlockPin(spot) : null;
                 return null;
               })}
-              {renderPopover()}
+              {renderPopover("desktop")}
             </div>
+            {renderPopover("mobile")}
           </div>
 
           <div className="map-legend">

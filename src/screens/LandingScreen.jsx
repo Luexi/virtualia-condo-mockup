@@ -14,6 +14,11 @@ const navLinks = [
   { label: "Portal residente", href: "#/residente" },
 ];
 
+const whatsappMessage = encodeURIComponent(
+  "Hola, me interesa Condo by Virtualia. Quiero recibir mas informacion.",
+);
+const WHATSAPP_CONTACT_URL = `https://wa.me/527443839939?text=${whatsappMessage}`;
+
 const platformMoments = [
   {
     title: "Cobranza visible",
@@ -96,9 +101,9 @@ function SectionNav() {
   );
 }
 
-function LandingButton({ href, children, variant = "primary" }) {
+function LandingButton({ href, children, variant = "primary", ...props }) {
   return (
-    <a className={`landing-btn landing-btn--${variant}`} href={href}>
+    <a className={`landing-btn landing-btn--${variant}`} href={href} {...props}>
       {children}
     </a>
   );
@@ -142,9 +147,15 @@ export default function LandingScreen() {
           <Logo />
         </a>
         <SectionNav />
-        <LandingButton href="#/login" variant="primary">
-          Entrar
-          <Ic name="ArrowRight" size={16} />
+        <LandingButton
+          href={WHATSAPP_CONTACT_URL}
+          variant="primary"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contactar por WhatsApp"
+        >
+          Contacto
+          <Ic name="Phone" size={16} />
         </LandingButton>
       </header>
 
@@ -310,9 +321,15 @@ export default function LandingScreen() {
               Entrar al panel
               <Ic name="ArrowRight" size={16} />
             </LandingButton>
-            <LandingButton href="#/residente" variant="outline">
-              Portal residente
-              <Ic name="Users" size={16} />
+            <LandingButton
+              href={WHATSAPP_CONTACT_URL}
+              variant="outline"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Contactar por WhatsApp"
+            >
+              Contactar por WhatsApp
+              <Ic name="Phone" size={16} />
             </LandingButton>
           </div>
         </div>

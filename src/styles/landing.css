@@ -902,9 +902,16 @@ a.landing-op-card:hover {
   .landing-nav {
     order: 3;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     justify-content: flex-start;
     overflow-x: auto;
     padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .landing-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .landing-hero__grid,
@@ -953,6 +960,8 @@ a.landing-op-card:hover {
 
   .landing-nav {
     gap: 16px;
+    flex-wrap: wrap;
+    overflow-x: visible;
   }
 
   .landing-nav a,
@@ -961,7 +970,7 @@ a.landing-op-card:hover {
   }
 
   .landing-hero__grid {
-    padding-top: 34px;
+    padding-top: 58px;
   }
 
   .landing-hero h1 {
