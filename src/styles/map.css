@@ -11,7 +11,7 @@
 }
 .map-toolbar__group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .map-toolbar__label {
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0;
   font-weight: 700; color: var(--text-subtle);
 }
 
@@ -21,9 +21,7 @@
 /* Lienzo */
 .map-canvas {
   position: relative;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(14,46,58,0.05), transparent 60%),
-    linear-gradient(160deg, var(--surface-2), var(--bg-soft));
+  background: var(--surface-2);
   border-bottom: 1px solid var(--border);
   padding: 26px 26px 30px;
   overflow: hidden;
@@ -64,7 +62,7 @@
 /* Halo (zona resaltable del híbrido) — oculto por defecto */
 .map-pin__halo {
   width: 56px; height: 56px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(14,140,111,0.28), rgba(14,140,111,0) 70%);
+  background: rgba(14,140,111,0.16);
   opacity: 0; transform: scale(0.6); transition: opacity 0.18s ease, transform 0.18s ease;
   pointer-events: none;
 }
@@ -106,7 +104,7 @@
 /* Etiqueta flotante (aparece al hover/selección) */
 .map-pin__label {
   position: absolute; top: calc(50% + 18px); left: 50%; transform: translateX(-50%);
-  white-space: nowrap; font-size: 11px; font-weight: 700; letter-spacing: -0.01em;
+  white-space: nowrap; font-size: 11px; font-weight: 700; letter-spacing: 0;
   color: var(--text); background: rgba(255,255,255,0.94);
   border: 1px solid var(--border); border-radius: 7px; padding: 2px 8px;
   box-shadow: var(--shadow-sm);
@@ -134,7 +132,7 @@
 .map-pin--gate .map-pin__chip { color: var(--slate-600); }
 .map-pin--amenity .map-pin__halo,
 .map-pin--gate .map-pin__halo {
-  background: radial-gradient(circle, rgba(30,129,229,0.24), rgba(30,129,229,0) 70%);
+  background: rgba(30,129,229,0.14);
 }
 
 /* ---------------- Popover anclado ---------------- */
@@ -154,7 +152,7 @@
 @keyframes mapPop { from { opacity: 0; } }
 
 .map-popover__head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
-.map-popover__id { font-weight: 800; font-size: 16px; letter-spacing: -0.02em; }
+.map-popover__id { font-weight: 800; font-size: 16px; letter-spacing: 0; }
 .map-popover__sub { font-size: 11.5px; color: var(--text-muted); }
 .map-popover__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 5px 0; }
 .map-popover__tickets { margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }

@@ -2,7 +2,7 @@ import React from "react";
 import { Ic } from "./ui.jsx";
 
 export default function StatusTag({
-  children = "Virtualia Condo",
+  children = "Condo by Virtualia",
 }) {
   return (
     <span className="status-tag">

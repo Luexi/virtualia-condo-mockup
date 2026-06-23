@@ -25,7 +25,7 @@ function TenantSelector({ active, onChange }) {
           <span>{community.name}</span>
           <span className="tenant-selector__sub">
             {active === "all"
-              ? "174 unidades · 2 comunidades"
+              ? "174 unidades / 2 comunidades"
               : `${community.units} ${community.unitWord || ""}`}
           </span>
         </span>
@@ -43,7 +43,9 @@ function TenantSelector({ active, onChange }) {
           />
           <div className="tenant-menu" role="listbox">
             <button
-              className={"tenant-menu__item" + (active === "all" ? " tenant-menu__item--active" : "")}
+              className={
+                "tenant-menu__item" + (active === "all" ? " tenant-menu__item--active" : "")
+              }
               onClick={() => {
                 onChange("all");
                 setOpen(false);
@@ -54,7 +56,7 @@ function TenantSelector({ active, onChange }) {
               </span>
               <span style={{ textAlign: "left" }}>
                 <span className="fw-600">Ambas comunidades</span>
-                <span className="tenant-selector__sub">174 unidades</span>
+                <span className="tenant-selector__sub">174 unidades ficticias</span>
               </span>
             </button>
             {D.COMMUNITIES.map((item) => (
@@ -81,7 +83,7 @@ function TenantSelector({ active, onChange }) {
                 <span style={{ textAlign: "left" }}>
                   <span className="fw-600">{item.name}</span>
                   <span className="tenant-selector__sub">
-                    {item.units} {item.unitWord} · {item.city}
+                    {item.units} {item.unitWord} / {item.city}
                   </span>
                 </span>
               </button>
@@ -96,7 +98,7 @@ function TenantSelector({ active, onChange }) {
 export default function Topbar({ tenant, setTenant, onLogout, onMenu }) {
   return (
     <header className="topbar">
-      <button className="icon-btn topbar__menu" aria-label="Abrir menú" onClick={onMenu}>
+      <button className="icon-btn topbar__menu" aria-label="Abrir menu" onClick={onMenu}>
         <Ic name="List" size={19} />
       </button>
       <TenantSelector active={tenant} onChange={setTenant} />
@@ -104,30 +106,25 @@ export default function Topbar({ tenant, setTenant, onLogout, onMenu }) {
         <span className="search__icon">
           <Ic name="Search" size={17} />
         </span>
-        <input placeholder="Buscar unidad, residente, pago, ticket..." aria-label="Buscar" />
-        <span className="search__kbd">CTRL K</span>
+        <input placeholder="Buscar unidad, residente, comprobante..." aria-label="Buscar" />
+        <span className="search__kbd">LOCAL</span>
       </div>
       <div className="top-actions">
         <span className="date-pill">
           <Ic name="Calendar" size={16} />
-          Sab, 30 May 2026
+          Periodo Jun 2026
         </span>
         <button className="icon-btn" aria-label="Ayuda">
           <Ic name="Help" size={19} />
         </button>
-        <button className="icon-btn" aria-label="Mensajes">
-          <Ic name="Mail" size={19} />
-          <span className="icon-btn__dot icon-btn__dot--teal">2</span>
-        </button>
-        <button className="icon-btn" aria-label="Notificaciones">
+        <button className="icon-btn" aria-label="Pendientes operativos">
           <Ic name="Bell" size={19} />
-          <span className="icon-btn__dot">3</span>
         </button>
         <button
           className="top-profile"
           onClick={onLogout}
-          title="Admin Condo · cerrar sesión"
-          aria-label="Admin Condo, cerrar sesión"
+          title="Admin Condo / cerrar sesion"
+          aria-label="Admin Condo, cerrar sesion"
         >
           <span className="top-avatar">AD</span>
           <span className="user-card__chevron">

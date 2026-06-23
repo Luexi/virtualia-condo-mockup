@@ -5,10 +5,10 @@ import { Ic, Logo } from "../components/ui.jsx";
 export default function LoginScreen({ onEnter }) {
   return (
     <main className="login">
-      <section className="login__aside" aria-label="Virtualia Condo">
+      <section className="login__aside" aria-label="Condo by Virtualia">
         <Logo size="lg" onDark />
         <div className="login__quote">
-          La administración de tu comunidad, <span>clara y bajo control</span>.
+          Backoffice residencial <span>claro, operativo y confiable</span>.
         </div>
         <div className="login__meta">
           <div className="login__stat">
@@ -17,7 +17,7 @@ export default function LoginScreen({ onEnter }) {
             </span>
             <div>
               <div className="login__stat-num">174</div>
-              <div className="login__stat-label">unidades en 2 comunidades</div>
+              <div className="login__stat-label">unidades ficticias</div>
             </div>
           </div>
           <div className="login__stat">
@@ -26,7 +26,7 @@ export default function LoginScreen({ onEnter }) {
             </span>
             <div>
               <div className="login__stat-num">Instancia privada</div>
-              <div className="login__stat-label">Acceso administrativo</div>
+              <div className="login__stat-label">Acceso administrativo visual</div>
             </div>
           </div>
         </div>
@@ -40,15 +40,15 @@ export default function LoginScreen({ onEnter }) {
             onEnter();
           }}
         >
-          <StatusTag>Virtualia Condo</StatusTag>
+          <StatusTag />
           <div className="login__lock">
             <Ic name="Lock" size={13} />
-            Instancia privada
+            Datos ficticios
           </div>
           <div>
             <h1>Acceso administrativo</h1>
             <p className="muted">
-              Gestiona tu comunidad desde un panel privado.
+              Recorre una instancia visual con informacion ficticia y acciones locales.
             </p>
           </div>
           <label className="field">
@@ -56,26 +56,26 @@ export default function LoginScreen({ onEnter }) {
             <input
               className="field__input"
               type="email"
-              placeholder="usuario@virtualia.local"
+              placeholder="admin@condo.local"
               autoComplete="off"
             />
           </label>
           <label className="field">
-            <span className="field__label">Contraseña</span>
+            <span className="field__label">Contrasena</span>
             <input
               className="field__input"
               type="password"
-              placeholder="••••••••"
+              placeholder="********"
               autoComplete="off"
             />
           </label>
           <div className="row row--between login__form-row">
             <label className="row login__remember">
               <input type="checkbox" defaultChecked />
-              Recordar este equipo
+              Conservar contexto visual
             </label>
             <button type="button" className="card__link" onClick={onEnter}>
-              Acceso rápido
+              Usar recorrido
             </button>
           </div>
           <button className="btn btn--primary btn--lg btn--block" type="submit">
@@ -86,7 +86,7 @@ export default function LoginScreen({ onEnter }) {
             <span className="banner__icon">
               <Ic name="Info" size={16} />
             </span>
-            Acceso privado · Gestión operativa centralizada.
+            Sin backend ni pagos reales en esta demo local.
           </div>
         </form>
       </section>

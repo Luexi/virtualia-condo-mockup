@@ -8,12 +8,12 @@ export default function Sidebar({ route, navigate, onLogout, onResident, mobile 
     <aside className={mobile ? "sidebar sidebar--mobile" : "sidebar"}>
       <div className="sidebar__brand">
         <Logo />
-        <button className="sidebar__collapse" aria-label="Colapsar menú">
+        <button className="sidebar__collapse" aria-label="Colapsar menu">
           <Ic name="ChevronLeft" size={16} />
         </button>
       </div>
 
-      <nav className="sidebar__nav" aria-label="Navegación principal">
+      <nav className="sidebar__nav" aria-label="Navegacion principal">
         {NAV_GROUPS.map((group) => (
           <div key={group.group}>
             <div className="sidebar__group-label">{group.group}</div>
@@ -32,16 +32,6 @@ export default function Sidebar({ route, navigate, onLogout, onResident, mobile 
                   <Ic name={item.icon} size={20} />
                 </span>
                 <span>{item.label}</span>
-                {item.badge ? (
-                  <span
-                    className={
-                      "nav-item__badge" +
-                      (item.badgeTone ? ` nav-item__badge--${item.badgeTone}` : "")
-                    }
-                  >
-                    {item.badge}
-                  </span>
-                ) : null}
               </button>
             ))}
           </div>
@@ -54,7 +44,7 @@ export default function Sidebar({ route, navigate, onLogout, onResident, mobile 
           <span className="nav-item__icon">
             <Ic name="UserCircle" size={20} />
           </span>
-          <span>Portal de residente</span>
+          <span>Portal residente</span>
           <span className="right">
             <Ic name="ArrowRight" size={15} />
           </span>
@@ -64,19 +54,19 @@ export default function Sidebar({ route, navigate, onLogout, onResident, mobile 
           <span className="nav-item__icon">
             <Ic name="LogOut" size={20} />
           </span>
-          <span>Cerrar sesión</span>
+          <span>Cerrar sesion</span>
         </button>
       </nav>
 
       <div className="sidebar__footer">
         <div className="promo">
-          <div className="promo__title">Reporte para comité</div>
+          <div className="promo__title">Reporte para comite</div>
           <div className="promo__text">
-            Preparar cierre mensual con indicadores ejecutivos.
+            Revisar corte mensual con saldos, comprobantes y pendientes.
           </div>
           <button className="promo__btn" onClick={() => navigate("reportes")}>
-            <Ic name="Sparkles" size={15} />
-            Preparar
+            <Ic name="FileText" size={15} />
+            Ver reporte
           </button>
         </div>
         <div style={{ marginTop: 12 }}>

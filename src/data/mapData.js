@@ -38,7 +38,7 @@ function diasFor(estado, rnd) {
 }
 
 // Catalogo corto de incidencias demo.
-const INCIDENCIAS = [
+const INCIDENTES = [
   { cat: "Plomería", icon: "Droplet", prio: "media", titulo: "Fuga reportada en patio" },
   { cat: "Electricidad", icon: "Bolt", prio: "media", titulo: "Falla de luminaria exterior" },
   { cat: "Jardinería", icon: "Leaf", prio: "baja", titulo: "Poda pendiente" },
@@ -72,7 +72,7 @@ function unit(id, tipo, xPct, yPct, estado, seed, extra = {}) {
       tags: real.tags || [],
       tickets:
         real.estado !== "corriente" && rnd() > 0.4
-          ? [INCIDENCIAS[seed % INCIDENCIAS.length]]
+          ? [INCIDENTES[seed % INCIDENTES.length]]
           : [],
       real: true,
       ...extra,
@@ -90,10 +90,10 @@ function unit(id, tipo, xPct, yPct, estado, seed, extra = {}) {
     saldo: saldoFor(estado, rnd),
     dias: diasFor(estado, rnd),
     owner: "Propietario " + String(seed % 90 + 1).padStart(2, "0"),
-    tenant: renta ? "Residente " + String(seed % 90 + 1).padStart(2, "0") : "—",
+    tenant: renta ? "Residente " + String(seed % 90 + 1).padStart(2, "0") : "-",
     renta,
     tags: renta ? ["Renta"] : [],
-    tickets: hasTicket ? [INCIDENCIAS[seed % INCIDENCIAS.length]] : [],
+    tickets: hasTicket ? [INCIDENTES[seed % INCIDENTES.length]] : [],
     real: false,
     ...extra,
   };
@@ -215,7 +215,7 @@ export function unitClass(unit, layer) {
     return "map-unit--mtto-" + unit.tickets[0].prio; // alta | media | baja
   }
   if (unit.renta) return "map-unit--renta";
-  if (unit.tags && unit.tags.includes("Comité")) return "map-unit--comite";
+  if (unit.tags && unit.tags.includes("Comite")) return "map-unit--comite";
   return "map-unit--propio";
 }
 
@@ -239,7 +239,7 @@ export function legendFor(layer) {
   return [
     { cls: "propio", label: "Habita propietario" },
     { cls: "renta", label: "En renta" },
-    { cls: "comite", label: "Comité" },
+    { cls: "comite", label: "Comite" },
   ];
 }
 

@@ -70,26 +70,6 @@ function Spark({ data, tallIdx }) {
   );
 }
 
-// ---- QR placeholder (deterministic grid) ----
-function QR({ seed = 7, size = 120 }) {
-  const cells = [];
-  let s = seed * 9301 + 49297;
-  const rnd = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
-  const n = 11;
-  for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
-    const corner = (x < 3 && y < 3) || (x > n - 4 && y < 3) || (x < 3 && y > n - 4);
-    if (corner) continue;
-    if (rnd() > 0.52) cells.push(e('rect', { key: `${x}-${y}`, x: x * 9 + 2, y: y * 9 + 2, width: 8, height: 8, rx: 1.5, fill: '#0E2E3A' }));
-  }
-  const finder = (cx, cy) => e('g', { key: `f${cx}${cy}` },
-    e('rect', { x: cx, y: cy, width: 25, height: 25, rx: 4, fill: 'none', stroke: '#0E2E3A', strokeWidth: 3 }),
-    e('rect', { x: cx + 7, y: cy + 7, width: 11, height: 11, rx: 2, fill: '#0E8C6F' }),
-  );
-  return e('svg', { viewBox: '0 0 105 105', width: size, height: size },
-    cells, finder(2, 2), finder(78, 2), finder(2, 78),
-  );
-}
-
 // ---- Toast ----
 function useToast() {
   const [toast, setToast] = useState(null);
@@ -128,7 +108,7 @@ function Card({ title, sub, icon, iconTone = 'teal', headerRight, children, foot
   );
 }
 
-export {  Logo, CondoMark, Badge, ESTADO_BADGE, Avatar, Ic, Money, Spark, QR, useToast, PageHeader, Card  };
-export default {  Logo, CondoMark, Badge, ESTADO_BADGE, Avatar, Ic, Money, Spark, QR, useToast, PageHeader, Card  };
+export {  Logo, CondoMark, Badge, ESTADO_BADGE, Avatar, Ic, Money, Spark, useToast, PageHeader, Card  };
+export default {  Logo, CondoMark, Badge, ESTADO_BADGE, Avatar, Ic, Money, Spark, useToast, PageHeader, Card  };
 
 
