@@ -24,3 +24,7 @@ coverage/
 
 # Local archive metadata
 virtualia-condo-mockup-approved-*
+
+# Local QA / browser automation artifacts
+.playwright-cli/
+output/

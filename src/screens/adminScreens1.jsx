@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as D from "../data/mockData.js";
-import { PageHeader, Card, Badge, Ic, Money, Avatar, ESTADO_BADGE } from "../components/ui.jsx";
+import { PageHeader, Card, Badge, Ic, Money, Avatar, Spark, ESTADO_BADGE } from "../components/ui.jsx";
 
 const statusTone = (status) => (ESTADO_BADGE[status] || { tone: "slate", label: status });
 const tenantLabel = (value) => (value && value !== "-" ? value : "Sin inquilino registrado");
@@ -14,9 +14,96 @@ function ActivityText({ value }) {
   });
 }
 
+function donutGradient(items) {
+  let acc = 0;
+  const stops = [];
+  items.forEach((item) => {
+    const start = acc;
+    acc += item.pct;
+    stops.push(`${item.color} ${start}% ${acc}%`);
+  });
+  return `conic-gradient(${stops.join(", ")})`;
+}
+
+const sparkPct = (arr) => {
+  const max = Math.max(...arr) || 1;
+  return arr.map((v) => Math.round((v / max) * 100));
+};
+
+// Cobranza mensual con eje, gridlines, linea de meta y tooltip en hover.
+function CollectionsChart({ onDetail }) {
+  const [hover, setHover] = useState(null);
+  const k = D.KPIS;
+  const H = 188;
+  // Junio se alinea con el headline (cobrado/pendiente del KPI) para evitar cifras contradictorias.
+  const flow = D.FLUJO.map((f) =>
+    f.mes === "Jun"
+      ? { mes: f.mes, cobrado: k.cobrado / 1000, pendiente: k.pendiente / 1000, cobradoMXN: k.cobrado, pendienteMXN: k.pendiente }
+      : { mes: f.mes, cobrado: f.cobrado, pendiente: f.pendiente, cobradoMXN: f.cobrado * 1000, pendienteMXN: f.pendiente * 1000 }
+  );
+  const meta = k.presupuesto / 1000;
+  const peak = Math.max(meta, ...flow.map((f) => f.cobrado + f.pendiente));
+  const domain = Math.ceil(peak / 50) * 50;
+  const ticks = [1, 0.75, 0.5, 0.25, 0].map((t) => Math.round(domain * t));
+  const px = (val) => (val / domain) * H;
+
+  return (
+    <div className="flowchart">
+      <div className="flowchart__yaxis" aria-hidden="true">
+        {ticks.map((t) => <span key={t}>${t}k</span>)}
+      </div>
+      <div className="flowchart__plot">
+        {ticks.map((t) => <span key={t} className="flowchart__gridline" style={{ bottom: `${px(t)}px` }} />)}
+        <span className="flowchart__meta" style={{ bottom: `${px(meta)}px` }}>
+          <span className="flowchart__meta-tag">Meta {D.fmtMXN(k.presupuesto)}</span>
+        </span>
+        {flow.map((f) => {
+          const active = hover === f.mes;
+          return (
+            <button
+              key={f.mes}
+              type="button"
+              className={`flowchart__col ${f.mes === "Jun" ? "is-current" : ""}`}
+              onMouseEnter={() => setHover(f.mes)}
+              onMouseLeave={() => setHover(null)}
+              onFocus={() => setHover(f.mes)}
+              onBlur={() => setHover(null)}
+              onClick={onDetail}
+              aria-label={`${f.mes}: cobrado ${D.fmtMXN(f.cobradoMXN)}, pendiente ${D.fmtMXN(f.pendienteMXN)}`}
+            >
+              <div className="flowchart__stack">
+                <span className="flowchart__seg flowchart__seg--pendiente" style={{ height: `${px(f.pendiente)}px` }} />
+                <span className="flowchart__seg flowchart__seg--cobrado" style={{ height: `${px(f.cobrado)}px` }} />
+              </div>
+              {active && (
+                <div className="chart-tooltip" style={{ bottom: `${px(f.cobrado + f.pendiente) + 12}px` }}>
+                  <div className="chart-tooltip__label"><span className="chart-dot chart-dot--cobrado" />Cobrado</div>
+                  <div className="chart-tooltip__val">{D.fmtMXN(f.cobradoMXN)}</div>
+                  <div className="chart-tooltip__label" style={{ marginTop: 7 }}><span className="chart-dot chart-dot--pendiente" />Pendiente</div>
+                  <div className="chart-tooltip__val">{D.fmtMXN(f.pendienteMXN)}</div>
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+      <div className="flowchart__xaxis">
+        {flow.map((f) => (
+          <span key={f.mes} className={`flowchart__xlabel ${f.mes === "Jun" ? "is-current" : ""}`}>{f.mes}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function DashboardScreen({ setRoute, setDetail, showToast }) {
   const k = D.KPIS;
-  const maxFlow = Math.max(...D.FLUJO.map((f) => f.cobrado + f.pendiente));
+  const pct = (part, whole) => Math.round((part / whole) * 100);
+  const SPARK = {
+    pendiente: sparkPct(D.FLUJO.map((f) => f.pendiente)),
+    tickets: sparkPct([12, 15, 13, 17, 16, 18]),
+    mtto: sparkPct([3, 4, 6, 5, 7, 6]),
+  };
 
   const openStatement = (unit) => {
     setDetail(unit);
@@ -30,14 +117,22 @@ function DashboardScreen({ setRoute, setDetail, showToast }) {
     { icon: "Elevator", tone: "peach", title: "Elevador 2 con falla intermitente", sub: "MT-317 pendiente de seguimiento", cta: "Ticket", route: "mantenimiento" },
   ];
 
-  const kpi = (label, value, icon, tone, sub) => (
+  const kpi = (label, value, icon, tone, sub, delta) => (
     <div className={`kpi ${tone ? `kpi--${tone}` : ""}`}>
       <div className="kpi__head">
         <span className="kpi__icon"><Ic name={icon} size={19} /></span>
         <span className="kpi__label">{label}</span>
+        {delta?.spark && <Spark data={delta.spark} tallIdx={delta.spark.length - 1} />}
       </div>
       <div className="kpi__value">{value}</div>
-      <div className="kpi__sub" style={{ marginTop: 10 }}>{sub}</div>
+      <div className="kpi__bottom">
+        {delta?.text && (
+          <span className={`kpi__delta kpi__delta--${delta.tone}`}>
+            <Ic name={delta.icon} size={12} />{delta.text}
+          </span>
+        )}
+        <span className="kpi__sub">{sub}</span>
+      </div>
     </div>
   );
 
@@ -154,29 +249,25 @@ function DashboardScreen({ setRoute, setDetail, showToast }) {
 
         <div className="stack">
           <div className="kpi-strip">
-            {kpi("Saldo pendiente", D.fmtMXN(k.pendiente), "Wallet", "amber", "14 unidades")}
-            {kpi("Tickets abiertos", String(k.tickets), "Wrench", "sky", "6 programados")}
-            {kpi("Mtto. programado", String(k.programados), "CalendarCheck", "green", "Proximos servicios")}
+            {kpi("Saldo pendiente", D.fmtMXN(k.pendiente), "Wallet", "amber", "14 unidades", { text: "4%", tone: "down", icon: "ArrowUp", spark: SPARK.pendiente })}
+            {kpi("Tickets abiertos", String(k.tickets), "Wrench", "sky", "6 programados", { text: "+3", tone: "flat", icon: "ArrowUp", spark: SPARK.tickets })}
+            {kpi("Mtto. programado", String(k.programados), "CalendarCheck", "green", "Proximos 14 dias", { text: "Al dia", tone: "up", icon: "Check", spark: SPARK.mtto })}
           </div>
 
           <Card
             title="Cobranza mensual"
+            sub="Cobrado vs. pendiente / meta de presupuesto"
             icon="ChartPie"
             body={false}
             headerRight={<button className="card__link" onClick={() => setRoute("cobranza")}>Detalle</button>}
           >
-            <div style={{ padding: "4px 22px 18px" }}>
-              <div className="barchart">
-                {D.FLUJO.map((f) => (
-                  <div key={f.mes} className="barchart__col">
-                    <div className="barchart__bars">
-                      <div className="barchart__bar barchart__bar--cobrado" style={{ height: `${(f.cobrado / maxFlow) * 190}px` }} />
-                      <div className="barchart__bar barchart__bar--pendiente" style={{ height: `${(f.pendiente / maxFlow) * 190}px` }} />
-                    </div>
-                    <div className="barchart__label">{f.mes}</div>
-                  </div>
-                ))}
+            <div style={{ padding: "0 22px 18px" }}>
+              <div className="chart-legend">
+                <span className="chart-legend__item"><span className="chart-legend__sw chart-legend__sw--cobrado" />Cobrado</span>
+                <span className="chart-legend__item"><span className="chart-legend__sw chart-legend__sw--pendiente" />Pendiente</span>
+                <span className="chart-legend__item"><span className="chart-legend__sw chart-legend__sw--meta" />Meta mensual</span>
               </div>
+              <CollectionsChart onDetail={() => setRoute("cobranza")} />
             </div>
           </Card>
 
@@ -204,6 +295,59 @@ function DashboardScreen({ setRoute, setDetail, showToast }) {
             </div>
           </Card>
         </div>
+      </div>
+
+      <div className="grid-2">
+        <Card title="Salud financiera" sub="Junio 2026 / MXN" icon="ShieldCheck" iconTone="teal">
+          <div className="finhealth">
+            {[
+              { label: "Presupuesto registrado", value: k.presupuesto, width: 100, tone: "slate", note: "Base operativa del mes" },
+              { label: "Cobrado", value: k.cobrado, width: pct(k.cobrado, k.presupuesto), tone: "teal", note: `${pct(k.cobrado, k.presupuesto)}% de la meta` },
+              { label: "Egresos", value: k.egresos, width: pct(k.egresos, k.presupuesto), tone: "amber", note: `${pct(k.egresos, k.presupuesto)}% del presupuesto` },
+            ].map((row) => (
+              <div key={row.label} className="finhealth__row">
+                <div className="finhealth__top">
+                  <span className="finhealth__label">{row.label}</span>
+                  <span className="money fw-700" style={{ fontSize: 13.5 }}>{D.fmtMXN(row.value)}</span>
+                </div>
+                <div className="progress-track"><div className={`progress-fill progress-fill--${row.tone}`} style={{ width: `${row.width}%` }} /></div>
+                <div className="finhealth__note">{row.note}</div>
+              </div>
+            ))}
+            <div className="finhealth__result">
+              <div>
+                <div className="finhealth__label">Saldo operativo</div>
+                <div className="muted" style={{ fontSize: 12 }}>Cobrado menos egresos del periodo</div>
+              </div>
+              <div className="finhealth__result-val">{D.fmtMXN(k.saldoOperativo)}</div>
+            </div>
+          </div>
+        </Card>
+
+        <Card
+          title="Egresos por categoria"
+          sub="Junio 2026"
+          icon="ChartPie"
+          headerRight={<button className="card__link" onClick={() => setRoute("reportes")}>Reporte</button>}
+        >
+          <div className="donut-wrap">
+            <div className="donut" style={{ background: donutGradient(D.EGRESOS) }}>
+              <div className="donut__hole">
+                <div className="muted" style={{ fontSize: 11 }}>Total egresos</div>
+                <div className="fw-700" style={{ fontSize: 16, fontFamily: "var(--font-mono)" }}>{D.fmtMXN(k.egresos)}</div>
+              </div>
+            </div>
+            <div className="donut-legend">
+              {D.EGRESOS.map((item) => (
+                <div key={item.cat} className="donut-legend__row">
+                  <span className="donut-legend__sw" style={{ background: item.color }} />
+                  <span>{item.cat}<span className="subtle" style={{ fontWeight: 500 }}> / {item.pct}%</span></span>
+                  <span className="money fw-700" style={{ fontSize: 12.5 }}>{D.fmtMXN(item.monto)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
       </div>
 
       <div className="grid-3">
