@@ -221,7 +221,7 @@
   .app { min-height: 100vh; margin: 0; border-radius: 0; grid-template-columns: 1fr; }
   .topbar__menu { display: grid; }
   .mobile-nav { display: block; }
-  .topbar { grid-template-columns: auto minmax(0, 1fr) auto; padding-inline: 14px; }
+  .topbar { grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; padding-inline: 14px; }
   .top-actions .date-pill, .top-actions .icon-btn:not(:last-of-type) { display: none; }
   .page { padding: 14px 14px 28px; }
   .welcome-h1 { font-size: 30px; }
@@ -246,6 +246,7 @@
   .card__header { padding-inline: 16px; }
   .tx-row { grid-template-columns: 34px 1fr; }
   .tx-row > :nth-child(n+3) { justify-self: start; }
+  .top-profile .user-card__chevron { display: none; }
 }
 
 @media (max-width: 430px) {

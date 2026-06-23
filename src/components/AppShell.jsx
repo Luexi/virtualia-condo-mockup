@@ -15,6 +15,7 @@ export default function AppShell({ route, navigate, tenant, setTenant, onLogout,
             tenant={tenant}
             setTenant={setTenant}
             onLogout={onLogout}
+            menuOpen={menuOpen}
             onMenu={() => setMenuOpen(true)}
           />
           {children}
@@ -22,16 +23,24 @@ export default function AppShell({ route, navigate, tenant, setTenant, onLogout,
       </div>
 
       {menuOpen ? (
-        <div className="mobile-nav">
+        <div
+          id="mobile-navigation"
+          className="mobile-nav"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu principal"
+        >
           <button
             className="mobile-nav__scrim"
-            aria-label="Cerrar menú"
+            type="button"
+            aria-label="Cerrar menu"
             onClick={() => setMenuOpen(false)}
           />
           <div className="mobile-nav__panel">
             <Sidebar
               mobile
               route={route}
+              onClose={() => setMenuOpen(false)}
               navigate={(nextRoute) => {
                 navigate(nextRoute);
                 setMenuOpen(false);

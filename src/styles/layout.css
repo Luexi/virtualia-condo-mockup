@@ -87,22 +87,31 @@
   min-width: 0;
 }
 .topbar > * { min-width: 0; }
+.tenant-selector-wrap { position: relative; min-width: 0; }
 .tenant-selector {
   display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 10px;
   background: var(--surface-2); border: 1px solid transparent; border-radius: 999px;
   cursor: pointer; font-weight: 700; font-size: 13.5px; width: 100%;
   transition: background 0.15s, box-shadow 0.15s;
+  min-width: 0;
 }
 .tenant-selector:hover { background: var(--surface-3); }
 .tenant-selector__icon-wrap {
   width: 28px; height: 28px; border-radius: 8px; background: var(--teal-50); color: var(--teal-600);
   display: grid; place-items: center; flex-shrink: 0;
 }
+.tenant-selector__text {
+  display: flex; flex-direction: column; min-width: 0; text-align: left; line-height: 1.25;
+}
+.tenant-selector__name,
+.tenant-selector__sub {
+  display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 .tenant-selector__sub { font-size: 11px; color: var(--text-muted); font-weight: 500; }
 .tenant-selector__chevron { margin-left: auto; color: var(--text-subtle); }
 
 .tenant-menu {
-  position: absolute; top: calc(100% + 8px); left: 0; width: 320px;
+  position: absolute; top: calc(100% + 8px); left: 0; width: min(320px, calc(100vw - 28px));
   background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
   box-shadow: var(--shadow-lg); padding: 8px; z-index: 60;
 }
@@ -169,10 +178,16 @@
 .breadcrumb button:hover { color: var(--teal-600); }
 .breadcrumb__sep { color: var(--text-subtle); }
 
-/* ============================================================
+/* Mobile navigation */
 .topbar__menu { display: none; }
 .tenant-menu__scrim { position: fixed; inset: 0; z-index: 55; cursor: default; }
-.mobile-nav { position: fixed; inset: 0; z-index: 100; display: none; }
-.mobile-nav__scrim { position: absolute; inset: 0; background: rgba(14,46,58,.34); }
-.mobile-nav__panel { position: absolute; inset: 0 auto 0 0; width: min(312px, calc(100vw - 44px)); background: var(--surface); box-shadow: var(--shadow-lg); }
-.sidebar--mobile { display: flex; height: 100%; border-right: none; }
+.mobile-nav { position: fixed; inset: 0; z-index: 100; display: block; }
+.mobile-nav__scrim {
+  position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0;
+  background: rgba(14,46,58,.34); cursor: default;
+}
+.mobile-nav__panel {
+  position: absolute; inset: 0 auto 0 0; width: min(312px, calc(100vw - 44px));
+  max-width: 100vw; background: var(--surface); box-shadow: var(--shadow-lg); overflow: hidden;
+}
+.sidebar.sidebar--mobile { display: flex; width: 100%; height: 100%; border-right: none; }

@@ -11,8 +11,9 @@ function TenantSelector({ active, onChange }) {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className="tenant-selector-wrap">
       <button
+        type="button"
         className="tenant-selector"
         onClick={() => setOpen((value) => !value)}
         aria-haspopup="listbox"
@@ -21,8 +22,8 @@ function TenantSelector({ active, onChange }) {
         <span className="tenant-selector__icon-wrap">
           <Ic name="Layers" size={16} />
         </span>
-        <span style={{ textAlign: "left" }}>
-          <span>{community.name}</span>
+        <span className="tenant-selector__text">
+          <span className="tenant-selector__name">{community.name}</span>
           <span className="tenant-selector__sub">
             {active === "all"
               ? "174 unidades / 2 comunidades"
@@ -38,11 +39,13 @@ function TenantSelector({ active, onChange }) {
         <>
           <button
             className="tenant-menu__scrim"
+            type="button"
             aria-label="Cerrar selector"
             onClick={() => setOpen(false)}
           />
           <div className="tenant-menu" role="listbox">
             <button
+              type="button"
               className={
                 "tenant-menu__item" + (active === "all" ? " tenant-menu__item--active" : "")
               }
@@ -54,14 +57,15 @@ function TenantSelector({ active, onChange }) {
               <span className="tenant-selector__icon-wrap">
                 <Ic name="Layers" size={16} />
               </span>
-              <span style={{ textAlign: "left" }}>
-                <span className="fw-600">Ambas comunidades</span>
+              <span className="tenant-selector__text">
+                <span className="tenant-selector__name fw-600">Ambas comunidades</span>
                 <span className="tenant-selector__sub">174 unidades ficticias</span>
               </span>
             </button>
             {D.COMMUNITIES.map((item) => (
               <button
                 key={item.id}
+                type="button"
                 className={
                   "tenant-menu__item" + (active === item.id ? " tenant-menu__item--active" : "")
                 }
@@ -80,8 +84,8 @@ function TenantSelector({ active, onChange }) {
                 >
                   <Ic name={item.icon} size={16} />
                 </span>
-                <span style={{ textAlign: "left" }}>
-                  <span className="fw-600">{item.name}</span>
+                <span className="tenant-selector__text">
+                  <span className="tenant-selector__name fw-600">{item.name}</span>
                   <span className="tenant-selector__sub">
                     {item.units} {item.unitWord} / {item.city}
                   </span>
@@ -95,10 +99,17 @@ function TenantSelector({ active, onChange }) {
   );
 }
 
-export default function Topbar({ tenant, setTenant, onLogout, onMenu }) {
+export default function Topbar({ tenant, setTenant, onLogout, onMenu, menuOpen = false }) {
   return (
     <header className="topbar">
-      <button className="icon-btn topbar__menu" aria-label="Abrir menu" onClick={onMenu}>
+      <button
+        className="icon-btn topbar__menu"
+        type="button"
+        aria-label="Abrir menu"
+        aria-controls="mobile-navigation"
+        aria-expanded={menuOpen}
+        onClick={onMenu}
+      >
         <Ic name="List" size={19} />
       </button>
       <TenantSelector active={tenant} onChange={setTenant} />

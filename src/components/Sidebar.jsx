@@ -3,13 +3,18 @@ import { NAV_GROUPS } from "../lib/routes.js";
 import StatusTag from "./StatusTag.jsx";
 import { Ic, Logo } from "./ui.jsx";
 
-export default function Sidebar({ route, navigate, onLogout, onResident, mobile = false }) {
+export default function Sidebar({ route, navigate, onLogout, onResident, mobile = false, onClose }) {
   return (
     <aside className={mobile ? "sidebar sidebar--mobile" : "sidebar"}>
       <div className="sidebar__brand">
         <Logo />
-        <button className="sidebar__collapse" aria-label="Colapsar menu">
-          <Ic name="ChevronLeft" size={16} />
+        <button
+          className="sidebar__collapse"
+          type="button"
+          aria-label={mobile ? "Cerrar menu" : "Colapsar menu"}
+          onClick={mobile ? onClose : undefined}
+        >
+          <Ic name={mobile ? "X" : "ChevronLeft"} size={16} />
         </button>
       </div>
 
