@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import heroResidential from "../assets/landing/hero-residential-premium.png";
 import mapHorizontal from "../assets/landing/condo-map-horizontal.png";
-import mapTowers from "../assets/landing/condo-map-towers.png";
 import tabletopOperations from "../assets/landing/tabletop-operations.png";
-import committeeReports from "../assets/landing/committee-reports.png";
 import { Ic, Logo } from "../components/ui.jsx";
+import LandingPreview from "../components/LandingPreview.jsx";
+import LandingMetrics from "../components/LandingMetrics.jsx";
+import { useReveal } from "../lib/useReveal.js";
 
 const navLinks = [
   { label: "Mapa visual", target: "landing-map" },
@@ -103,23 +104,53 @@ function LandingButton({ href, children, variant = "primary" }) {
   );
 }
 
+// Wrapper de scroll-reveal: aplica clase animada y un indice de stagger opcional.
+function Reveal({ as: Tag = "div", className = "", index, style, children, ...rest }) {
+  const [ref, revealClass] = useReveal();
+  const mergedStyle = index != null ? { "--reveal-i": index, ...style } : style;
+  return (
+    <Tag ref={ref} className={`${revealClass} ${className}`.trim()} style={mergedStyle} {...rest}>
+      {children}
+    </Tag>
+  );
+}
+
+function useScrolled(threshold = 8) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > threshold);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [threshold]);
+  return scrolled;
+}
+
 export default function LandingScreen() {
+  const scrolled = useScrolled();
+
+  // Habilita el scroll natural del documento mientras se muestra la landing.
+  useEffect(() => {
+    document.documentElement.classList.add("landing-active");
+    return () => document.documentElement.classList.remove("landing-active");
+  }, []);
+
   return (
     <main className="landing-page">
+      <header className={`landing-header${scrolled ? " landing-header--scrolled" : ""}`}>
+        <a href="/" className="landing-logo" aria-label="Condo by Virtualia">
+          <Logo />
+        </a>
+        <SectionNav />
+        <LandingButton href="#/login" variant="primary">
+          Entrar
+          <Ic name="ArrowRight" size={16} />
+        </LandingButton>
+      </header>
+
       <section className="landing-hero" aria-labelledby="landing-title">
         <img className="landing-hero__bg" src={heroResidential} alt="" aria-hidden="true" />
         <div className="landing-hero__wash" aria-hidden="true" />
-
-        <header className="landing-header">
-          <a href="/" className="landing-logo" aria-label="Condo by Virtualia">
-            <Logo />
-          </a>
-          <SectionNav />
-          <LandingButton href="#/login" variant="primary">
-            Entrar
-            <Ic name="ArrowRight" size={16} />
-          </LandingButton>
-        </header>
 
         <div className="landing-hero__grid">
           <div className="landing-hero__copy">
@@ -151,10 +182,12 @@ export default function LandingScreen() {
           </div>
 
           <figure className="landing-hero__figure">
-            <img src={mapHorizontal} alt="Mapa visual de un condominio con capas operativas." />
+            <LandingPreview screen="dashboard" label="Panel de inicio de Condo con KPIs y cobranza" />
           </figure>
         </div>
       </section>
+
+      <LandingMetrics />
 
       <section className="landing-section landing-platform" id="landing-platform">
         <div className="landing-feature">
@@ -169,14 +202,14 @@ export default function LandingScreen() {
               accion manual cuando corresponde.
             </p>
             <div className="landing-moments">
-              {platformMoments.map((item) => (
-                <article key={item.title} className="landing-moment">
+              {platformMoments.map((item, i) => (
+                <Reveal as="article" key={item.title} className="landing-moment" index={i}>
                   <span><Ic name={item.icon} size={20} /></span>
                   <div>
                     <h3>{item.title}</h3>
                     <p>{item.body}</p>
                   </div>
-                </article>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -184,29 +217,29 @@ export default function LandingScreen() {
       </section>
 
       <section className="landing-section landing-map" id="landing-map">
-        <div className="landing-section-head">
+        <Reveal className="landing-section-head">
           <span className="landing-section-label">Mapa visual</span>
           <h2>El condominio se entiende mejor cuando se ve completo.</h2>
           <p>La vista de mapa convierte unidades, amenidades y accesos en una superficie operable para cada rol.</p>
-        </div>
-        <figure className="landing-wide-media">
-          <img src={mapTowers} alt="Mapa visual de torres residenciales con indicadores por unidad." />
-        </figure>
+        </Reveal>
+        <Reveal className="landing-preview-wrap">
+          <LandingPreview screen="mapa" label="Mapa visual del condominio por capas operativas" />
+        </Reveal>
         <div className="landing-highlight-grid">
-          {mapHighlights.map((item) => (
-            <article key={item.title}>
+          {mapHighlights.map((item, i) => (
+            <Reveal as="article" key={item.title} index={i}>
               <h3>{item.title}</h3>
               <p>{item.body}</p>
-            </article>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="landing-section landing-committee" id="landing-committee">
-        <figure className="landing-report-media">
-          <img src={committeeReports} alt="Reporte financiero para comite con indicadores y graficas." />
-        </figure>
-        <div className="landing-committee__copy">
+        <Reveal className="landing-preview-wrap landing-preview-wrap--committee">
+          <LandingPreview screen="reportes" label="Reporte financiero para comite con indicadores" />
+        </Reveal>
+        <Reveal className="landing-committee__copy">
           <span className="landing-icon-chip"><Ic name="ShieldCheck" size={22} /></span>
           <span className="landing-section-label">Comite</span>
           <h2>Reportes que se pueden leer sin pedir otra hoja.</h2>
@@ -221,17 +254,17 @@ export default function LandingScreen() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section className="landing-section landing-operations" id="landing-operations">
-        <div className="landing-section-head">
+        <Reveal className="landing-section-head">
           <span className="landing-section-label">Operacion</span>
           <h2>El trabajo diario con menos friccion.</h2>
           <p>
             Los modulos se ordenan alrededor de lo que staff, comite y residentes necesitan resolver.
           </p>
-        </div>
+        </Reveal>
         <div className="landing-ops-grid">
           <article className="landing-ops-visual">
             <img src={tabletopOperations} alt="" aria-hidden="true" />
@@ -240,7 +273,7 @@ export default function LandingScreen() {
               <p>La operacion financiera convive con mantenimiento, comunicados y acceso sin romper responsabilidades.</p>
             </div>
           </article>
-          {operationCards.map((item) => {
+          {operationCards.map((item, i) => {
             const content = (
               <>
                 <span className="landing-card-icon"><Ic name={item.icon} size={18} /></span>
@@ -255,13 +288,13 @@ export default function LandingScreen() {
               </>
             );
             return item.href ? (
-              <a className="landing-op-card" key={item.title} href={item.href}>
+              <Reveal as="a" className="landing-op-card" key={item.title} href={item.href} index={i}>
                 {content}
-              </a>
+              </Reveal>
             ) : (
-              <article className="landing-op-card" key={item.title}>
+              <Reveal as="article" className="landing-op-card" key={item.title} index={i}>
                 {content}
-              </article>
+              </Reveal>
             );
           })}
         </div>
@@ -269,15 +302,15 @@ export default function LandingScreen() {
 
       <section className="landing-final">
         <div>
-          <span className="landing-section-label">Siguiente paso</span>
+          <span className="landing-section-label landing-section-label--invert">Siguiente paso</span>
           <h2>Listo para entrar al panel.</h2>
           <p>Revisa mapa, cobranza, reportes y operacion desde el entorno visual de Condo.</p>
           <div className="landing-actions">
-            <LandingButton href="#/login" variant="primary">
+            <LandingButton href="#/login" variant="light">
               Entrar al panel
               <Ic name="ArrowRight" size={16} />
             </LandingButton>
-            <LandingButton href="#/residente" variant="secondary">
+            <LandingButton href="#/residente" variant="outline">
               Portal residente
               <Ic name="Users" size={16} />
             </LandingButton>
