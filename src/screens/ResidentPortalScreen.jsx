@@ -38,7 +38,7 @@ function ResidentPortalScreen({ onBack, showToast }) {
         <QuickAction icon="Paperclip" label="Comprobante" onClick={() => setTab("comprobantes")} />
         <QuickAction icon="Wrench" label="Incidencia" onClick={() => showToast("Incidencia preparada")} />
         <QuickAction icon="CalendarCheck" label="Amenidad" onClick={() => showToast("Solicitud preparada")} />
-        <QuickAction icon="KeyRound" label="Visita" onClick={() => showToast("Autorizacion preparada")} />
+        <QuickAction icon="KeyRound" label="Visita" onClick={() => showToast("Autorización preparada")} />
       </div>
 
       <div className="r-card">
@@ -96,7 +96,7 @@ function ResidentPortalScreen({ onBack, showToast }) {
       <div className="r-card">
         <div className="fw-700" style={{ fontSize: 15, marginBottom: 4 }}>Enviar comprobante</div>
         <div className="muted" style={{ fontSize: 12.5, marginBottom: 14 }}>
-          Adjunta evidencia para revision de administracion. Esta demo no procesa cargos ni pagos en linea.
+          Adjunta evidencia para revisión de administración. Esta demo no procesa cargos ni pagos en linea.
         </div>
         <div className="field">
           <label className="field__label">Monto reportado</label>
@@ -106,20 +106,20 @@ function ResidentPortalScreen({ onBack, showToast }) {
           <label className="field__label">Origen del comprobante</label>
           <select className="field__select" defaultValue="Comprobante manual">
             <option>Comprobante manual</option>
-            <option>Deposito reportado</option>
-            <option>Efectivo administracion</option>
+            <option>Depósito reportado</option>
+            <option>Efectivo administración</option>
           </select>
         </div>
         <div className="ph" style={{ height: 130, marginTop: 12, flexDirection: "column", gap: 6 }}>
           <Ic name="Paperclip" size={22} />
           <div>Adjuntar archivo</div>
         </div>
-        <button className="btn btn--primary btn--block" style={{ marginTop: 14 }} onClick={() => showToast("Comprobante enviado a revision")}>
+        <button className="btn btn--primary btn--block" style={{ marginTop: 14 }} onClick={() => showToast("Comprobante enviado a revisión")}>
           <Ic name="Send" size={16} /> Enviar comprobante
         </button>
         <div className="banner banner--teal" style={{ fontSize: 12, marginTop: 12 }}>
           <span className="banner__icon"><Ic name="Info" size={14} /></span>
-          El movimiento queda como "Por validar" hasta que administracion lo revise.
+          El movimiento queda como "Por validar" hasta que administración lo revise.
         </div>
       </div>
 
@@ -147,14 +147,14 @@ function ResidentPortalScreen({ onBack, showToast }) {
   const more = (
     <>
       <div className="r-card">
-        <div className="fw-700" style={{ fontSize: 15, marginBottom: 12 }}>Mas opciones</div>
+        <div className="fw-700" style={{ fontSize: 15, marginBottom: 12 }}>Más opciones</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
           {[
             ["FolderOpen", "Documentos publicados", "documentos"],
             ["CalendarCheck", "Reservar amenidad", "amenidad"],
             ["KeyRound", "Autorizar visita", "acceso"],
             ["Wrench", "Reportar incidencia", "incidencia"],
-            ["UserCircle", "Contacto administracion", "contacto"],
+            ["UserCircle", "Contacto administración", "contacto"],
           ].map(([icon, label, key], index) => (
             <button
               key={key}
@@ -195,7 +195,7 @@ function ResidentPortalScreen({ onBack, showToast }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "center" }}>
         <div className="row row--between" style={{ width: 390, maxWidth: "100%" }}>
           <button className="btn btn--secondary btn--sm" onClick={onBack}><Ic name="ChevronLeft" size={15} /> Volver al panel</button>
-          <span className="status-tag">Portal residente / movil</span>
+          <span className="status-tag">Portal residente / móvil</span>
         </div>
         <div className="phone">
           <div className="phone__status">
@@ -211,7 +211,7 @@ function ResidentPortalScreen({ onBack, showToast }) {
             {[
               ["inicio", "Home", "Inicio"],
               ["comprobantes", "Paperclip", "Comprobantes"],
-              ["mas", "Grid", "Mas"],
+              ["mas", "Grid", "Más"],
             ].map(([key, icon, label]) => (
               <button key={key} className={`phone__tab ${tab === key ? "phone__tab--active" : ""}`} onClick={() => setTab(key)}>
                 <Ic name={icon} size={21} />

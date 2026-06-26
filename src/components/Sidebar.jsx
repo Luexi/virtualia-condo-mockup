@@ -11,7 +11,7 @@ export default function Sidebar({ route, navigate, onLogout, onResident, mobile 
         <button
           className="sidebar__collapse"
           type="button"
-          aria-label={mobile ? "Cerrar menu" : "Colapsar menu"}
+          aria-label={mobile ? "Cerrar menú" : "Colapsar menú"}
           onClick={mobile ? onClose : undefined}
         >
           <Ic name={mobile ? "X" : "ChevronLeft"} size={16} />
@@ -59,13 +59,13 @@ export default function Sidebar({ route, navigate, onLogout, onResident, mobile 
           <span className="nav-item__icon">
             <Ic name="LogOut" size={20} />
           </span>
-          <span>Cerrar sesion</span>
+          <span>Cerrar sesión</span>
         </button>
       </nav>
 
       <div className="sidebar__footer">
         <div className="promo">
-          <div className="promo__title">Reporte para comite</div>
+          <div className="promo__title">Reporte para comité</div>
           <div className="promo__text">
             Revisar corte mensual con saldos, comprobantes y pendientes.
           </div>

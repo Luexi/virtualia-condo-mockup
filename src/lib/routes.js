@@ -29,7 +29,7 @@ export const ROUTES = [
 
 export const NAV_GROUPS = [
   {
-    group: "Operacion",
+    group: "Operación",
     items: [
       { id: "dashboard", label: "Inicio", icon: "Home" },
       { id: "mapa", label: "Mapa", icon: "Map" },
@@ -48,10 +48,10 @@ export const NAV_GROUPS = [
       { id: "accesos", label: "Accesos", icon: "KeyRound" },
     ],
   },
-  { group: "Analisis", items: [{ id: "reportes", label: "Reportes", icon: "ChartPie" }] },
+  { group: "Análisis", items: [{ id: "reportes", label: "Reportes", icon: "ChartPie" }] },
   {
     group: "General",
-    items: [{ id: "configuracion", label: "Configuracion", icon: "Settings" }],
+    items: [{ id: "configuracion", label: "Configuración", icon: "Settings" }],
   },
 ];
 
@@ -61,7 +61,7 @@ export const PAGE_META = {
   dashboard: { title: "Inicio", sub: "Prioridades operativas de la comunidad." },
   mapa: {
     title: "Mapa",
-    sub: "Vista read-only del condominio por cobranza, mantenimiento y ocupacion.",
+    sub: "Vista read-only del condominio por cobranza, mantenimiento y ocupación.",
   },
   unidades: {
     title: "Unidades",
@@ -73,11 +73,11 @@ export const PAGE_META = {
   },
   cobranza: {
     title: "Cobranza",
-    sub: "Operacion mensual de cuotas, cargos, pagos manuales y morosidad.",
+    sub: "Operación mensual de cuotas, cargos, pagos manuales y morosidad.",
   },
   pagos: {
     title: "Pagos por validar",
-    sub: "Revisa comprobantes reportados y deja una decision auditable.",
+    sub: "Revisa comprobantes reportados y deja una decisión auditable.",
   },
   mantenimiento: {
     title: "Mantenimiento",
@@ -85,11 +85,11 @@ export const PAGE_META = {
   },
   albercas: {
     title: "Albercas",
-    sub: "Bitacora operativa y estado de servicio por alberca.",
+    sub: "Bitácora operativa y estado de servicio por alberca.",
   },
   amenidades: {
     title: "Amenidades",
-    sub: "Activos comunitarios, calendario y solicitudes sujetas a aprobacion.",
+    sub: "Activos comunitarios, calendario y solicitudes sujetas a aprobación.",
   },
   comunicados: {
     title: "Comunicados y documentos",
@@ -97,19 +97,19 @@ export const PAGE_META = {
   },
   accesos: {
     title: "Accesos y visitantes",
-    sub: "Pases manuales, autorizaciones y bitacora de caseta.",
+    sub: "Pases manuales, autorizaciones y bitácora de caseta.",
   },
   reportes: {
-    title: "Reportes para comite",
+    title: "Reportes para comité",
     sub: "Resumen operativo y financiero derivado de datos ficticios.",
   },
   residente: {
     title: "Portal residente",
-    sub: "Vista movil para saldo, comprobantes, comunicados y solicitudes propias.",
+    sub: "Vista móvil para saldo, comprobantes, comunicados y solicitudes propias.",
   },
   configuracion: {
-    title: "Configuracion",
-    sub: "Parametros visibles de comunidad, roles y operacion manual.",
+    title: "Configuración",
+    sub: "Parámetros visibles de comunidad, roles y operación manual.",
   },
 };
 

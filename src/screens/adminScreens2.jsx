@@ -4,8 +4,8 @@ import { PageHeader, Card, Badge, Ic, Money, Avatar } from "../components/ui.jsx
 
 const REVIEW_STATE = {
   nuevo: { tone: "amber", label: "Por validar" },
-  revision: { tone: "sky", label: "En revision" },
-  aclaracion: { tone: "peach", label: "Aclaracion" },
+  revision: { tone: "sky", label: "En revisión" },
+  aclaracion: { tone: "peach", label: "Aclaración" },
 };
 
 function CollectionsScreen({ tenant, showToast }) {
@@ -36,7 +36,7 @@ function CollectionsScreen({ tenant, showToast }) {
           <button key="follow" className="btn btn--secondary" onClick={() => showToast("Seguimiento manual preparado")}>
             <Ic name="Send" size={16} /> Preparar seguimiento
           </button>,
-          <button key="charges" className="btn btn--primary" onClick={() => showToast("Previsualizacion de cuotas abierta")}>
+          <button key="charges" className="btn btn--primary" onClick={() => showToast("Previsualización de cuotas abierta")}>
             <Ic name="Coins" size={16} /> Previsualizar cuotas
           </button>,
         ]}
@@ -46,14 +46,14 @@ function CollectionsScreen({ tenant, showToast }) {
         {summary("Cobrado / junio", D.fmtMXN(k.cobrado), "TrendingUp", "green", `${k.cobradoPct}% de presupuesto`)}
         {summary("Pendiente", D.fmtMXN(k.pendiente), "Wallet", "amber", `${overdue.length} unidades con saldo`)}
         {summary("Por validar", String(k.porValidar), "FileCheck", "sky", "Comprobantes recibidos")}
-        {summary("Recargos manuales", D.fmtMXN(8400), "AlertTriangle", "red", "Sujetos a revision")}
+        {summary("Recargos manuales", D.fmtMXN(8400), "AlertTriangle", "red", "Sujetos a revisión")}
       </div>
 
       <div className="grid-main">
         <div className="stack">
           <Card
             title="Cobranza vs. pendiente"
-            sub="Ultimos 6 meses / miles de MXN"
+            sub="Últimos 6 meses / miles de MXN"
             icon="ChartPie"
             headerRight={
               <div className="chart-legend" style={{ display: "flex", gap: 14 }}>
@@ -85,7 +85,7 @@ function CollectionsScreen({ tenant, showToast }) {
             <div className="table-wrap">
               <table className="tbl">
                 <thead>
-                  <tr>{["Fecha", "Unidad", "Concepto", "Metodo", "Monto"].map((head) => <th key={head} className={head === "Monto" ? "num" : ""}>{head}</th>)}</tr>
+                  <tr>{["Fecha", "Unidad", "Concepto", "Método", "Monto"].map((head) => <th key={head} className={head === "Monto" ? "num" : ""}>{head}</th>)}</tr>
                 </thead>
                 <tbody>
                   {D.PAGOS_RECIENTES.map((p) => (
@@ -123,7 +123,7 @@ function CollectionsScreen({ tenant, showToast }) {
           <Card title="Acciones masivas" icon="Bolt">
             <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
               {[
-                ["Coins", "Previsualizar cuotas de junio", "primary", "Previsualizacion abierta"],
+                ["Coins", "Previsualizar cuotas de junio", "primary", "Previsualización abierta"],
                 ["Send", "Preparar seguimiento manual", "soft", "Seguimiento preparado"],
                 ["Sheet", "Exportar tabla", "secondary", "Vista exportada"],
                 ["Printer", "Preparar reporte PDF", "secondary", "Reporte preparado"],
@@ -135,7 +135,7 @@ function CollectionsScreen({ tenant, showToast }) {
             </div>
           </Card>
 
-          <Card title="Composicion de cuotas" icon="Layers">
+          <Card title="Composición de cuotas" icon="Layers">
             <div className="kv-list">
               {[
                 ["Ordinarias", 268000, "teal"],
@@ -153,7 +153,7 @@ function CollectionsScreen({ tenant, showToast }) {
             </div>
           </Card>
 
-          <Card title="Morosidad por antiguedad" icon="AlertTriangle" iconTone="red" body={false} headerRight={<span className="badge badge--red">{D.KPIS.morosos} unidades</span>}>
+          <Card title="Morosidad por antigüedad" icon="AlertTriangle" iconTone="red" body={false} headerRight={<span className="badge badge--red">{D.KPIS.morosos} unidades</span>}>
             <div style={{ padding: "8px 6px" }}>
               {D.MOROSIDAD_ANT.map((item, index) => (
                 <div key={item.rango} style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 8, padding: "11px 12px", borderBottom: index < D.MOROSIDAD_ANT.length - 1 ? "1px solid var(--border)" : "none" }}>
@@ -202,7 +202,7 @@ function PaymentsReviewScreen({ tenant, showToast }) {
       <div className="banner banner--sky">
         <span className="banner__icon"><Ic name="ShieldCheck" size={17} /></span>
         <div>
-          <div className="banner__title">Revision manual con trazabilidad visual</div>
+          <div className="banner__title">Revisión manual con trazabilidad visual</div>
           Aprueba, rechaza o solicita aclaracion sobre comprobantes ficticios. La demo no conecta servicios externos ni procesa pagos.
         </div>
       </div>
@@ -211,7 +211,7 @@ function PaymentsReviewScreen({ tenant, showToast }) {
         <div className="table-wrap">
           <table className="tbl">
             <thead>
-              <tr>{["Folio", "Unidad", "Monto", "Metodo", "Reportado", "Comprobante", "Estado", "Acciones"].map((head) => <th key={head} className={head === "Monto" ? "num" : ""}>{head}</th>)}</tr>
+              <tr>{["Folio", "Unidad", "Monto", "Método", "Reportado", "Comprobante", "Estado", "Acciones"].map((head) => <th key={head} className={head === "Monto" ? "num" : ""}>{head}</th>)}</tr>
             </thead>
             <tbody>
               {rows.map((p) => {
@@ -280,19 +280,19 @@ function PaymentsReviewScreen({ tenant, showToast }) {
               </div>
               <div className="kv-list">
                 <div className="kv-row"><span className="kv-row__k">Monto reportado</span><span className="kv-row__v money">{D.fmtMXN(selected.monto)}</span></div>
-                <div className="kv-row"><span className="kv-row__k">Metodo</span><span className="kv-row__v">{selected.metodo}</span></div>
+                <div className="kv-row"><span className="kv-row__k">Método</span><span className="kv-row__v">{selected.metodo}</span></div>
                 <div className="kv-row"><span className="kv-row__k">Unidad</span><span className="kv-row__v">{selected.unit}</span></div>
                 <div className="kv-row"><span className="kv-row__k">Reportado por</span><span className="kv-row__v">{selected.quien}</span></div>
                 <div className="kv-row"><span className="kv-row__k">Fecha</span><span className="kv-row__v">{selected.fecha}</span></div>
               </div>
               <div className="field">
-                <label className="field__label">Nota de revision</label>
+                <label className="field__label">Nota de revisión</label>
                 <textarea className="field__textarea" placeholder="Ej. Coincide con cuota ordinaria de junio..." style={{ minHeight: 64 }} />
               </div>
             </div>
             <div className="drawer__footer">
               <button className="btn btn--danger-soft" style={{ flex: 1 }} onClick={() => resolve(selected.id, "Comprobante rechazado")}><Ic name="X" size={16} />Rechazar</button>
-              <button className="btn btn--secondary" style={{ flex: 1 }} onClick={() => resolve(selected.id, "Aclaracion solicitada")}><Ic name="Help" size={16} />Aclaracion</button>
+              <button className="btn btn--secondary" style={{ flex: 1 }} onClick={() => resolve(selected.id, "Aclaración solicitada")}><Ic name="Help" size={16} />Aclaración</button>
               <button className="btn btn--primary" style={{ flex: 1 }} onClick={() => resolve(selected.id, "Comprobante aprobado")}><Ic name="Check" size={16} />Aprobar</button>
             </div>
           </div>

@@ -58,7 +58,7 @@ export function useReveal(options) {
 }
 
 /**
- * Anima un numero de 0 -> target con requestAnimationFrame cuando `active` es true.
+ * Anima un número de 0 -> target con requestAnimationFrame cuando `active` es true.
  * Respeta reduced-motion (entrega el valor final sin animar).
  */
 export function useCountUp(target, active, { duration = 1200 } = {}) {

@@ -105,7 +105,7 @@ export default function Topbar({ tenant, setTenant, onLogout, onMenu, menuOpen =
       <button
         className="icon-btn topbar__menu"
         type="button"
-        aria-label="Abrir menu"
+        aria-label="Abrir menú"
         aria-controls="mobile-navigation"
         aria-expanded={menuOpen}
         onClick={onMenu}
@@ -134,8 +134,8 @@ export default function Topbar({ tenant, setTenant, onLogout, onMenu, menuOpen =
         <button
           className="top-profile"
           onClick={onLogout}
-          title="Admin Condo / cerrar sesion"
-          aria-label="Admin Condo, cerrar sesion"
+          title="Admin Condo / cerrar sesión"
+          aria-label="Admin Condo, cerrar sesión"
         >
           <span className="top-avatar">AD</span>
           <span className="user-card__chevron">

@@ -48,7 +48,7 @@ export default function LoginScreen({ onEnter }) {
           <div>
             <h1>Acceso administrativo</h1>
             <p className="muted">
-              Recorre una instancia visual con informacion ficticia y acciones locales.
+              Recorre una instancia visual con información ficticia y acciones locales.
             </p>
           </div>
           <label className="field">
@@ -61,7 +61,7 @@ export default function LoginScreen({ onEnter }) {
             />
           </label>
           <label className="field">
-            <span className="field__label">Contrasena</span>
+            <span className="field__label">Contraseña</span>
             <input
               className="field__input"
               type="password"

@@ -5,7 +5,7 @@ import { PageHeader, Card, Badge, Ic, Avatar } from "../components/ui.jsx";
 const PRIORITY = { alta: "red", media: "amber", baja: "teal" };
 const POOL_STATE = {
   optima: { tone: "green", label: "En servicio" },
-  atencion: { tone: "amber", label: "Requiere atencion" },
+  atencion: { tone: "amber", label: "Requiere atención" },
   fuera: { tone: "red", label: "Fuera de servicio" },
 };
 const RES_STATE = {
@@ -98,7 +98,7 @@ function MaintenanceScreen({ tenant, showToast }) {
           <div className="table-wrap">
             <table className="tbl">
               <thead>
-                <tr>{["Folio", "Asunto", "Categoria", "Prioridad", "Responsable", "Fecha", "Estado"].map((head) => <th key={head}>{head}</th>)}</tr>
+                <tr>{["Folio", "Asunto", "Categoría", "Prioridad", "Responsable", "Fecha", "Estado"].map((head) => <th key={head}>{head}</th>)}</tr>
               </thead>
               <tbody>
                 {tickets.map((ticket) => {
@@ -135,8 +135,8 @@ function PoolsScreen({ showToast }) {
       <PageHeader
         route="albercas"
         actions={[
-          <span key="state" className="status-tag" style={{ alignSelf: "center" }}>Operacion manual</span>,
-          <button key="log" className="btn btn--secondary" onClick={() => showToast("Bitacora visual preparada")}><Ic name="Download" size={16} />Bitacora</button>,
+          <span key="state" className="status-tag" style={{ alignSelf: "center" }}>Operación manual</span>,
+          <button key="log" className="btn btn--secondary" onClick={() => showToast("Bitácora visual preparada")}><Ic name="Download" size={16} />Bitácora</button>,
           <button key="add" className="btn btn--primary" onClick={() => showToast("Registro de servicio abierto")}><Ic name="Plus" size={16} />Registrar servicio</button>,
         ]}
       />
@@ -189,9 +189,9 @@ function PoolsScreen({ showToast }) {
             ) : (
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14 }}>
                 {[
-                  ["Ultima revision", pool.ultima, "CheckCircle"],
-                  ["Proximo servicio", pool.prox, "CalendarCheck"],
-                  ["Responsable", "Administracion", "UserCircle"],
+                  ["Última revisión", pool.ultima, "CheckCircle"],
+                  ["Próximo servicio", pool.prox, "CalendarCheck"],
+                  ["Responsable", "Administración", "UserCircle"],
                 ].map(([label, value, icon]) => (
                   <div key={label} style={{ background: "var(--surface-2)", border: "1px solid var(--border)", borderRadius: 12, padding: 14 }}>
                     <span className="icon-chip icon-chip--teal" style={{ width: 30, height: 30 }}><Ic name={icon} size={15} /></span>
@@ -203,14 +203,14 @@ function PoolsScreen({ showToast }) {
             )}
           </Card>
 
-          <Card title="Bitacora de servicio" icon="FileText" body={false} headerRight={<button className="card__link">Ver completa</button>}>
+          <Card title="Bitácora de servicio" icon="FileText" body={false} headerRight={<button className="card__link">Ver completa</button>}>
             <div style={{ padding: "6px 20px 14px" }}>
               <div className="timeline" style={{ marginTop: 8 }}>
                 {D.POOL_LOG.map((log) => (
-                  <div key={`${log.fecha}-${log.accion}`} className="tl-item">
+                  <div key={`${log.fecha}-${log.acción}`} className="tl-item">
                     <span className={`tl-dot tl-dot--${log.tone}`}><Ic name="FileText" size={15} /></span>
                     <div className="tl-body">
-                      <div className="tl-title">{log.accion}<span className="muted" style={{ fontWeight: 500, fontSize: 12 }}>{log.fecha}</span></div>
+                      <div className="tl-title">{log.acción}<span className="muted" style={{ fontWeight: 500, fontSize: 12 }}>{log.fecha}</span></div>
                       <div className="tl-meta">{log.quien} / registro manual</div>
                     </div>
                   </div>
@@ -221,7 +221,7 @@ function PoolsScreen({ showToast }) {
 
           <Card title="Evidencia de servicio" icon="Image" headerRight={<button className="card__link" onClick={() => showToast("Foto adjuntada")}><Ic name="Plus" size={14} />Subir</button>}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }}>
-              {["Area", "Equipo", "Limpieza", "Cierre"].map((label) => (
+              {["Área", "Equipo", "Limpieza", "Cierre"].map((label) => (
                 <div key={label} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <div className="ph" style={{ height: 90 }}><Ic name="Image" size={20} /></div>
                   <div style={{ fontSize: 11, fontWeight: 600, textAlign: "center", color: "var(--text-muted)" }}>{label}</div>
@@ -234,10 +234,10 @@ function PoolsScreen({ showToast }) {
         <div className="stack">
           <Card title="Ficha de alberca" icon="Info">
             <div className="kv-list">
-              <div className="kv-row"><span className="kv-row__k">Ultima revision</span><span className="kv-row__v">{pool.ultima}</span></div>
-              <div className="kv-row"><span className="kv-row__k">Proximo servicio</span><span className="kv-row__v">{pool.estado === "fuera" ? <span className="badge badge--red">Suspendido</span> : pool.prox}</span></div>
+              <div className="kv-row"><span className="kv-row__k">Última revisión</span><span className="kv-row__v">{pool.ultima}</span></div>
+              <div className="kv-row"><span className="kv-row__k">Próximo servicio</span><span className="kv-row__v">{pool.estado === "fuera" ? <span className="badge badge--red">Suspendido</span> : pool.prox}</span></div>
               <div className="kv-row"><span className="kv-row__k">Seguimiento</span><span className="kv-row__v">{relatedTicket ? relatedTicket.id : "Sin ticket abierto"}</span></div>
-              <div className="kv-row"><span className="kv-row__k">Ubicacion</span><span className="kv-row__v">{pool.com}</span></div>
+              <div className="kv-row"><span className="kv-row__k">Ubicación</span><span className="kv-row__v">{pool.com}</span></div>
             </div>
           </Card>
 
@@ -253,7 +253,7 @@ function PoolsScreen({ showToast }) {
                 <div className="row" style={{ gap: 11, padding: 12, background: "var(--surface-2)", borderRadius: 11 }}>
                   <span className={`icon-chip ${pool.estado === "fuera" ? "icon-chip--red" : "icon-chip--amber"}`}><Ic name="Wrench" size={16} /></span>
                   <div>
-                    <div className="fw-600" style={{ fontSize: 13 }}>{pool.estado === "fuera" ? "Bomba detenida" : "Revision pendiente"}</div>
+                    <div className="fw-600" style={{ fontSize: 13 }}>{pool.estado === "fuera" ? "Bomba detenida" : "Revisión pendiente"}</div>
                     <div className="muted" style={{ fontSize: 12 }}>{relatedTicket ? `${relatedTicket.id} / ${relatedTicket.estado}` : "Sin ticket asignado"}</div>
                   </div>
                 </div>
@@ -265,7 +265,7 @@ function PoolsScreen({ showToast }) {
             <div className="kv-list">
               <div className="kv-row"><span className="kv-row__k">Albercas</span><span className="kv-row__v">3</span></div>
               <div className="kv-row"><span className="kv-row__k">En servicio</span><span className="kv-row__v">{D.POOLS.filter((item) => item.estado === "optima").length}</span></div>
-              <div className="kv-row"><span className="kv-row__k">Requieren atencion</span><span className="kv-row__v">{D.POOLS.filter((item) => item.estado !== "optima").length}</span></div>
+              <div className="kv-row"><span className="kv-row__k">Requieren atención</span><span className="kv-row__v">{D.POOLS.filter((item) => item.estado !== "optima").length}</span></div>
             </div>
           </Card>
         </div>
@@ -276,7 +276,7 @@ function PoolsScreen({ showToast }) {
 
 function AmenitiesScreen({ showToast }) {
   const [view, setView] = useState("admin");
-  const week = ["Lun 22", "Mar 23", "Mie 24", "Jue 25", "Vie 26", "Sab 27", "Dom 28"];
+  const week = ["Lun 22", "Mar 23", "Mié 24", "Jue 25", "Vie 26", "Sáb 27", "Dom 28"];
   const calendar = {
     0: [["Gimnasio", "green"]],
     4: [["Salon", "teal"]],
@@ -301,21 +301,21 @@ function AmenitiesScreen({ showToast }) {
         <div className="card" style={{ maxWidth: 560 }}>
           <div className="card__body" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             <div className="fw-700" style={{ fontSize: 16 }}>Solicitar amenidad</div>
-            <div className="muted" style={{ fontSize: 13, marginTop: -8 }}>Vista simplificada para residentes. Las solicitudes quedan pendientes de aprobacion.</div>
+            <div className="muted" style={{ fontSize: 13, marginTop: -8 }}>Vista simplificada para residentes. Las solicitudes quedan pendientes de aprobación.</div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
               {D.AMENITIES.slice(0, 4).map((item) => (
                 <button key={item.id} className="card" style={{ padding: 14, display: "flex", gap: 11, alignItems: "center", textAlign: "left" }} onClick={() => showToast(`Solicitud preparada para ${item.nombre}`)}>
                   <span className="icon-chip icon-chip--lg icon-chip--teal"><Ic name={item.icon} size={20} /></span>
                   <div>
                     <div className="fw-600" style={{ fontSize: 13.5 }}>{item.nombre}</div>
-                    <div className="muted" style={{ fontSize: 11.5 }}>{item.deposito > 0 ? `Deposito ${D.fmtMXN(item.deposito)}` : "Sin deposito"}</div>
+                    <div className="muted" style={{ fontSize: 11.5 }}>{item.deposito > 0 ? `Depósito ${D.fmtMXN(item.deposito)}` : "Sin depósito"}</div>
                   </div>
                 </button>
               ))}
             </div>
             <div className="banner banner--teal" style={{ fontSize: 12.5 }}>
               <span className="banner__icon"><Ic name="Info" size={15} /></span>
-              La reserva queda pendiente hasta que administracion la apruebe.
+              La reserva queda pendiente hasta que administración la apruebe.
             </div>
           </div>
         </div>
@@ -332,7 +332,7 @@ function AmenitiesScreen({ showToast }) {
                   </div>
                   <div className="muted" style={{ fontSize: 11.5, lineHeight: 1.4 }}>{item.regla}</div>
                   <div className="row row--between" style={{ paddingTop: 8, borderTop: "1px solid var(--border)" }}>
-                    {item.deposito > 0 ? <span className="badge badge--ghost">Deposito {D.fmtMXN(item.deposito)}</span> : <span className="subtle" style={{ fontSize: 12 }}>Sin deposito</span>}
+                    {item.deposito > 0 ? <span className="badge badge--ghost">Depósito {D.fmtMXN(item.deposito)}</span> : <span className="subtle" style={{ fontSize: 12 }}>Sin depósito</span>}
                   </div>
                 </div>
               </div>

@@ -3,12 +3,12 @@ import { KPIS } from "../data/mockData.js";
 import { Ic } from "./ui.jsx";
 import { useInView, useCountUp } from "../lib/useReveal.js";
 
-// Datos ficticios reales del demo (mockData.KPIS) para que los numeros sean consistentes con el panel.
+// Datos ficticios reales del demo (mockData.KPIS) para que los números sean consistentes con el panel.
 const STATS = [
   { key: "cobradoPct", target: KPIS.cobradoPct, suffix: "%", icon: "TrendingUp", label: "Cobranza del mes", note: "Cuotas conciliadas en junio" },
   { key: "cobrado", target: KPIS.cobrado, prefix: "$", scale: 1000, decimals: 1, suffix: "k", icon: "Coins", label: "Cobrado en el periodo", note: "Pagos manuales validados" },
   { key: "morosos", target: KPIS.morosos, icon: "AlertTriangle", label: "Unidades en seguimiento", note: "Con saldo vencido" },
-  { key: "porValidar", target: KPIS.porValidar, icon: "Wallet", label: "Comprobantes por revisar", note: "En la cola de validacion" },
+  { key: "porValidar", target: KPIS.porValidar, icon: "Wallet", label: "Comprobantes por revisar", note: "En la cola de validación" },
 ];
 
 function formatStat(value, stat) {
@@ -41,7 +41,7 @@ export default function LandingMetrics() {
       <div className="landing-metrics__inner">
         <div className="landing-metrics__head">
           <span className="landing-section-label landing-section-label--invert">Impacto operativo</span>
-          <h2 id="landing-metrics-title">Numeros que el comite puede leer de un vistazo.</h2>
+          <h2 id="landing-metrics-title">Números que el comité puede leer de un vistazo.</h2>
           <p>Indicadores derivados del mismo contexto operativo, con datos ficticios de la demo.</p>
         </div>
         <div className="landing-metrics__grid">

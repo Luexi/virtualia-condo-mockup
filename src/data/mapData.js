@@ -1,9 +1,9 @@
 // Datos del Mapa — Virtualia Condo.
-// El mapa ES una ilustracion isometrica fija (diorama 3D) subida a mano. Encima se
+// El mapa ES una ilustración isométrica fija (diorama 3D) subida a mano. Encima se
 // superpone una capa interactiva de "hotspots" (pines) posicionados por porcentaje
-// sobre la imagen. El sistema NO genera ni modifica la ilustracion.
+// sobre la imagen. El sistema NO genera ni modifica la ilustración.
 //
-// Las posiciones xPct/yPct (0-100) estan CALIBRADAS A MANO sobre cada render concreto.
+// Las posiciones xPct/yPct (0-100) están CALIBRADAS A MANO sobre cada render concreto.
 // Es un subconjunto curado (no todas las unidades) pensado para una demo visual hermosa.
 // Datos ficticios; las unidades reales del mock se integran para que el mapa cuadre con
 // Unidades / Cobranza / Estado de cuenta.
@@ -111,8 +111,8 @@ function gate(id, label, xPct, yPct, estado = "optima") {
 // 4 manzanas de villas en cuadricula; albercas turquesa en el centro de
 // cada manzana; caseta de acceso abajo al centro. Coordenadas a mano.
 // ==================================================================
-// Coordenadas calibradas: techos detectados por analisis de imagen (deteccion de
-// teja naranja) y centroides de alberca turquesa. Verificadas con previsualizacion.
+// Coordenadas calibradas: techos detectados por análisis de imagen (detección de
+// teja naranja) y centroides de alberca turquesa. Verificadas con previsualización.
 const LAGO_HOTSPOTS = [
   // --- Manzana superior-izquierda (alberca en 34%,29.5%) ---
   unit("Casa 14", "Casa", 20.4, 18.3, "corriente", 14), // real · al corriente
@@ -147,7 +147,7 @@ const LAGO_HOTSPOTS = [
 // y salon; caseta al frente. Coordenadas a mano sobre las fachadas.
 // ==================================================================
 // Coordenadas calibradas sobre las fachadas frontales de cada torre (rejilla de
-// balcones) y centroides del deck central. Verificadas con previsualizacion.
+// balcones) y centroides del deck central. Verificadas con previsualización.
 const CEDRO_HOTSPOTS = [
   // --- Torre A (izquierda): cara frontal con balcones, 3 columnas x 3 filas ---
   unit("A-512", "Departamento", 22, 24, "corriente", 512), // real
@@ -215,7 +215,7 @@ export function unitClass(unit, layer) {
     return "map-unit--mtto-" + unit.tickets[0].prio; // alta | media | baja
   }
   if (unit.renta) return "map-unit--renta";
-  if (unit.tags && unit.tags.includes("Comite")) return "map-unit--comite";
+  if (unit.tags && unit.tags.includes("Comité")) return "map-unit--comite";
   return "map-unit--propio";
 }
 
@@ -239,7 +239,7 @@ export function legendFor(layer) {
   return [
     { cls: "propio", label: "Habita propietario" },
     { cls: "renta", label: "En renta" },
-    { cls: "comite", label: "Comite" },
+    { cls: "comite", label: "Comité" },
   ];
 }
 

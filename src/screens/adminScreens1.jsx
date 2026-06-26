@@ -112,8 +112,8 @@ function DashboardScreen({ setRoute, setDetail, showToast }) {
 
   const queue = [
     { icon: "Wallet", tone: "amber", title: "9 comprobantes por revisar", sub: `${D.fmtMXN(24300)} reportados por residentes`, cta: "Revisar", route: "pagos" },
-    { icon: "AlertTriangle", tone: "red", title: "3 unidades con mora mayor a 60 dias", sub: "B-1102, Casa 37 y una unidad adicional", cta: "Ver saldos", route: "cobranza" },
-    { icon: "Waves", tone: "sky", title: "Alberca Sur fuera de servicio", sub: "Bomba detenida, ticket MT-316", cta: "Bitacora", route: "albercas" },
+    { icon: "AlertTriangle", tone: "red", title: "3 unidades con mora mayor a 60 días", sub: "B-1102, Casa 37 y una unidad adicional", cta: "Ver saldos", route: "cobranza" },
+    { icon: "Waves", tone: "sky", title: "Alberca Sur fuera de servicio", sub: "Bomba detenida, ticket MT-316", cta: "Bitácora", route: "albercas" },
     { icon: "Elevator", tone: "peach", title: "Elevador 2 con falla intermitente", sub: "MT-317 pendiente de seguimiento", cta: "Ticket", route: "mantenimiento" },
   ];
 
@@ -234,7 +234,7 @@ function DashboardScreen({ setRoute, setDetail, showToast }) {
             <div className="copilot__prompts">
               {[
                 ["pagos", "Revisar pagos pendientes"],
-                ["reportes", "Ver reporte para comite"],
+                ["reportes", "Ver reporte para comité"],
                 ["cobranza", "Auditar unidades con saldo"],
                 ["comunicados", "Preparar comunicado manual"],
               ].map(([route, label]) => (
@@ -251,7 +251,7 @@ function DashboardScreen({ setRoute, setDetail, showToast }) {
           <div className="kpi-strip">
             {kpi("Saldo pendiente", D.fmtMXN(k.pendiente), "Wallet", "amber", "14 unidades", { text: "4%", tone: "down", icon: "ArrowUp", spark: SPARK.pendiente })}
             {kpi("Tickets abiertos", String(k.tickets), "Wrench", "sky", "6 programados", { text: "+3", tone: "flat", icon: "ArrowUp", spark: SPARK.tickets })}
-            {kpi("Mtto. programado", String(k.programados), "CalendarCheck", "green", "Proximos 14 dias", { text: "Al dia", tone: "up", icon: "Check", spark: SPARK.mtto })}
+            {kpi("Mtto. programado", String(k.programados), "CalendarCheck", "green", "Próximos 14 días", { text: "Al día", tone: "up", icon: "Check", spark: SPARK.mtto })}
           </div>
 
           <Card
@@ -281,7 +281,7 @@ function DashboardScreen({ setRoute, setDetail, showToast }) {
             <div style={{ padding: "4px 22px 16px" }}>
               {D.PAGOS_RECIENTES.map((p) => (
                 <div key={`${p.unit}-${p.fecha}`} className="tx-row">
-                  <span className={`icon-chip icon-chip--${p.metodo.includes("Efectivo") ? "amber" : p.metodo.includes("Deposito") ? "sky" : "teal"}`}>
+                  <span className={`icon-chip icon-chip--${p.metodo.includes("Efectivo") ? "amber" : p.metodo.includes("Depósito") ? "sky" : "teal"}`}>
                     <Ic name={p.metodo.includes("Efectivo") ? "Coins" : "Wallet"} size={16} />
                   </span>
                   <div>
@@ -325,7 +325,7 @@ function DashboardScreen({ setRoute, setDetail, showToast }) {
         </Card>
 
         <Card
-          title="Egresos por categoria"
+          title="Egresos por categoría"
           sub="Junio 2026"
           icon="ChartPie"
           headerRight={<button className="card__link" onClick={() => setRoute("reportes")}>Reporte</button>}
@@ -361,7 +361,7 @@ function DashboardScreen({ setRoute, setDetail, showToast }) {
             ))}
           </div>
         </Card>
-        <Card title="Proximos mantenimientos" icon="CalendarCheck" headerRight={<button className="card__link" onClick={() => setRoute("mantenimiento")}>Ver todo</button>}>
+        <Card title="Próximos mantenimientos" icon="CalendarCheck" headerRight={<button className="card__link" onClick={() => setRoute("mantenimiento")}>Ver todo</button>}>
           <div className="act-list">
             {D.PREVENTIVO.map((p) => (
               <div key={p.titulo} className="act-item" style={{ gridTemplateColumns: "34px 1fr auto" }}>
@@ -464,7 +464,7 @@ function UnitsScreen({ tenant, setRoute, setDetail, showToast }) {
                         <Avatar name={u.u} tone={u.tipo === "Casa" ? "sky" : "teal"} />
                         <div>
                           <div className="cell-main">{u.u}</div>
-                          <div className="cell-sub">{u.tipo}{u.tags.includes("Comite") ? " / Comite" : ""}</div>
+                          <div className="cell-sub">{u.tipo}{u.tags.includes("Comité") ? " / Comité" : ""}</div>
                         </div>
                       </div>
                     </td>
@@ -482,7 +482,7 @@ function UnitsScreen({ tenant, setRoute, setDetail, showToast }) {
                         <button className="icon-btn" title="Revisar cobranza" aria-label={`Revisar cobranza de ${u.u}`} onClick={(ev) => { ev.stopPropagation(); setDetail(u.u); setRoute("cobranza"); }}>
                           <Ic name="Wallet" size={16} />
                         </button>
-                        <button className="icon-btn" title="Mas acciones" aria-label={`Mas acciones para ${u.u}`} onClick={(ev) => { ev.stopPropagation(); showToast("Acciones visuales abiertas"); }}>
+                        <button className="icon-btn" title="Más acciones" aria-label={`Más acciones para ${u.u}`} onClick={(ev) => { ev.stopPropagation(); showToast("Acciones visuales abiertas"); }}>
                           <Ic name="MoreVertical" size={16} />
                         </button>
                       </div>
@@ -552,7 +552,7 @@ function UnitStatementScreen({ detail, setRoute, showToast }) {
                 </div>
                 <div style={{ marginTop: 8 }}>
                   <span className={`badge badge--${status.tone}`} style={{ background: "rgba(255,255,255,0.12)", color: "#fff" }}>
-                    <span className="badge__dot" />{status.label}{unit.dias > 0 ? ` / ${unit.dias} dias` : ""}
+                    <span className="badge__dot" />{status.label}{unit.dias > 0 ? ` / ${unit.dias} días` : ""}
                   </span>
                 </div>
               </div>
@@ -572,7 +572,7 @@ function UnitStatementScreen({ detail, setRoute, showToast }) {
           <Card title="Notas internas" icon="FileText">
             <div className="banner banner--amber" style={{ fontSize: 12.5 }}>
               <span className="banner__icon"><Ic name="Info" size={15} /></span>
-              Acuerdo de seguimiento visible para administracion. Sin contacto externo desde esta demo.
+              Acuerdo de seguimiento visible para administración. Sin contacto externo desde esta demo.
             </div>
             <textarea className="field__textarea" style={{ marginTop: 12 }} placeholder="Agregar nota interna..." />
             <button className="btn btn--soft btn--sm" style={{ marginTop: 10 }} onClick={() => showToast("Nota guardada")}>Guardar nota</button>
@@ -580,7 +580,7 @@ function UnitStatementScreen({ detail, setRoute, showToast }) {
         </div>
 
         <div className="stack">
-          <Card title="Linea financiera" icon="Clock">
+          <Card title="Línea financiera" icon="Clock">
             <div className="timeline">
               {D.STATEMENT.timeline.map((item) => (
                 <div key={item.t} className="tl-item">

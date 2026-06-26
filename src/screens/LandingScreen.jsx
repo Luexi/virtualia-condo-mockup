@@ -9,13 +9,13 @@ import { useReveal } from "../lib/useReveal.js";
 
 const navLinks = [
   { label: "Mapa visual", target: "landing-map" },
-  { label: "Comite", target: "landing-committee" },
-  { label: "Operacion", target: "landing-operations" },
+  { label: "Comité", target: "landing-committee" },
+  { label: "Operación", target: "landing-operations" },
   { label: "Portal residente", href: "#/residente" },
 ];
 
 const whatsappMessage = encodeURIComponent(
-  "Hola, me interesa Condo by Virtualia. Quiero recibir mas informacion.",
+  "Hola, me interesa Condo by Virtualia. Quiero recibir mas información.",
 );
 const WHATSAPP_CONTACT_URL = `https://wa.me/527443839939?text=${whatsappMessage}`;
 
@@ -26,12 +26,12 @@ const platformMoments = [
     icon: "Receipt",
   },
   {
-    title: "Comite informado",
+    title: "Comité informado",
     body: "Reportes ejecutivos para revisar ingresos, egresos y estados sin rehacer hojas.",
     icon: "FileText",
   },
   {
-    title: "Operacion diaria",
+    title: "Operación diaria",
     body: "Mantenimiento, comunicados, amenidades y accesos dentro del mismo contexto.",
     icon: "Wrench",
   },
@@ -39,8 +39,8 @@ const platformMoments = [
 
 const mapHighlights = [
   { title: "Unidades ubicables", body: "Cada departamento o casa vive dentro del mapa, no en una lista aislada." },
-  { title: "Capas operativas", body: "Cobranza, mantenimiento y ocupacion se leen sin mezclar responsabilidades." },
-  { title: "Accion correcta", body: "El mapa guia hacia padron, cobranza o seguimiento sin crear atajos inseguros." },
+  { title: "Capas operativas", body: "Cobranza, mantenimiento y ocupación se leen sin mezclar responsabilidades." },
+  { title: "Acción correcta", body: "El mapa guía hacia padrón, cobranza o seguimiento sin crear atajos inseguros." },
 ];
 
 const committeeHighlights = [
@@ -64,7 +64,7 @@ const operationCards = [
   },
   {
     title: "Amenidades",
-    body: "Solicitudes y calendario para areas comunes, albercas y reservas basicas.",
+    body: "Solicitudes y calendario para áreas comunes, albercas y reservas básicas.",
     icon: "CalendarCheck",
   },
   {
@@ -74,7 +74,7 @@ const operationCards = [
   },
   {
     title: "Accesos",
-    body: "Folios, visitantes y bitacora manual para vigilancia sin exponer finanzas.",
+    body: "Folios, visitantes y bitácora manual para vigilancia sin exponer finanzas.",
     icon: "KeyRound",
   },
 ];
@@ -168,7 +168,7 @@ export default function LandingScreen() {
             <p className="landing-kicker">Backoffice residencial premium</p>
             <h1 id="landing-title">Condo by Virtualia</h1>
             <p>
-              Administracion residencial con mapa visual, cobranza, reportes para comite y portal residente en una
+              Administración residencial con mapa visual, cobranza, reportes para comité y portal residente en una
               experiencia clara, privada y operativa.
             </p>
             <div className="landing-actions">
@@ -203,14 +203,14 @@ export default function LandingScreen() {
       <section className="landing-section landing-platform" id="landing-platform">
         <div className="landing-feature">
           <figure className="landing-feature__media">
-            <img src={tabletopOperations} alt="Mesa de administracion residencial con documentos y tablet." />
+            <img src={tabletopOperations} alt="Mesa de administración residencial con documentos y tablet." />
           </figure>
           <div className="landing-feature__copy">
             <span className="landing-section-label">Plataforma</span>
-            <h2>Una operacion clara para administradores y comite.</h2>
+            <h2>Una operación clara para administradores y comité.</h2>
             <p>
-              Condo organiza cobranza, reportes y seguimiento diario en una vista comun, con estados honestos y
-              accion manual cuando corresponde.
+              Condo organiza cobranza, reportes y seguimiento diario en una vista común, con estados honestos y
+              acción manual cuando corresponde.
             </p>
             <div className="landing-moments">
               {platformMoments.map((item, i) => (
@@ -248,14 +248,14 @@ export default function LandingScreen() {
 
       <section className="landing-section landing-committee" id="landing-committee">
         <Reveal className="landing-preview-wrap landing-preview-wrap--committee">
-          <LandingPreview screen="reportes" label="Reporte financiero para comite con indicadores" />
+          <LandingPreview screen="reportes" label="Reporte financiero para comité con indicadores" />
         </Reveal>
         <Reveal className="landing-committee__copy">
           <span className="landing-icon-chip"><Ic name="ShieldCheck" size={22} /></span>
-          <span className="landing-section-label">Comite</span>
+          <span className="landing-section-label">Comité</span>
           <h2>Reportes que se pueden leer sin pedir otra hoja.</h2>
           <p>
-            La informacion financiera se presenta con jerarquia ejecutiva, estados claros y origen consistente.
+            La información financiera se presenta con jerarquía ejecutiva, estados claros y origen consistente.
           </p>
           <div className="landing-checklist">
             {committeeHighlights.map((item) => (
@@ -270,10 +270,10 @@ export default function LandingScreen() {
 
       <section className="landing-section landing-operations" id="landing-operations">
         <Reveal className="landing-section-head">
-          <span className="landing-section-label">Operacion</span>
-          <h2>El trabajo diario con menos friccion.</h2>
+          <span className="landing-section-label">Operación</span>
+          <h2>El trabajo diario con menos fricción.</h2>
           <p>
-            Los modulos se ordenan alrededor de lo que staff, comite y residentes necesitan resolver.
+            Los módulos se ordenan alrededor de lo que staff, comité y residentes necesitan resolver.
           </p>
         </Reveal>
         <div className="landing-ops-grid">
@@ -281,7 +281,7 @@ export default function LandingScreen() {
             <img src={tabletopOperations} alt="" aria-hidden="true" />
             <div>
               <h3>Cobranza y seguimiento en contexto.</h3>
-              <p>La operacion financiera convive con mantenimiento, comunicados y acceso sin romper responsabilidades.</p>
+              <p>La operación financiera convive con mantenimiento, comunicados y acceso sin romper responsabilidades.</p>
             </div>
           </article>
           {operationCards.map((item, i) => {
@@ -315,7 +315,7 @@ export default function LandingScreen() {
         <div>
           <span className="landing-section-label landing-section-label--invert">Siguiente paso</span>
           <h2>Listo para entrar al panel.</h2>
-          <p>Revisa mapa, cobranza, reportes y operacion desde el entorno visual de Condo.</p>
+          <p>Revisa mapa, cobranza, reportes y operación desde el entorno visual de Condo.</p>
           <div className="landing-actions">
             <LandingButton href="#/login" variant="light">
               Entrar al panel
@@ -340,7 +340,7 @@ export default function LandingScreen() {
 
       <footer className="landing-footer">
         <Logo />
-        <p>Administracion residencial clara, trazable y bajo control.</p>
+        <p>Administración residencial clara, trazable y bajo control.</p>
       </footer>
     </main>
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as D from "../data/mockData.js";
 import { PageHeader, Card, Badge, Ic, Avatar } from "../components/ui.jsx";
 
-const SEGMENTS = ["Todos", "Propietarios", "Inquilinos", "Comite", "Morosos", "Torre Cedro", "Privada Lago Azul"];
+const SEGMENTS = ["Todos", "Propietarios", "Inquilinos", "Comité", "Morosos", "Torre Cedro", "Privada Lago Azul"];
 const ACCESS_STATE = {
   autorizado: { tone: "green", label: "Autorizado" },
   usado: { tone: "slate", label: "Usado" },
@@ -56,7 +56,7 @@ function CommunicationsScreen({ showToast }) {
             <span className="banner__icon"><Ic name="FileText" size={17} /></span>
             <div>
               <div className="banner__title">Plantillas manuales</div>
-              Prepara avisos base para revision antes de publicarlos en la comunidad.
+              Prepara avisos base para revisión antes de publicarlos en la comunidad.
               <button className="card__link" style={{ display: "inline-flex", marginLeft: 6 }} onClick={() => setDraftOpen(true)}>Crear aviso</button>
             </div>
           </div>
@@ -105,7 +105,7 @@ function CommunicationsScreen({ showToast }) {
                 </div>
               </div>
               <div className="field">
-                <label className="field__label">Titulo</label>
+                <label className="field__label">Título</label>
                 <input className="field__input" placeholder="Ej. Corte de agua programado" />
               </div>
               <div className="field">
@@ -113,7 +113,7 @@ function CommunicationsScreen({ showToast }) {
                   <label className="field__label">Mensaje</label>
                   <button
                     className="btn btn--soft btn--sm"
-                    onClick={() => setMessage("Estimados residentes: informamos una actividad de mantenimiento programada. Favor de tomar previsiones y revisar los detalles publicados por administracion.")}
+                    onClick={() => setMessage("Estimados residentes: informamos una actividad de mantenimiento programada. Favor de tomar previsiones y revisar los detalles publicados por administración.")}
                   >
                     <Ic name="FileText" size={14} />Usar plantilla
                   </button>
@@ -152,7 +152,7 @@ function AccessScreen({ showToast }) {
         route="accesos"
         actions={[
           <span key="state" className="badge badge--green" style={{ alignSelf: "center" }}><span className="badge__dot" />Caseta operativa</span>,
-          <button key="new" className="btn btn--primary" onClick={() => showToast("Autorizacion visual preparada")}><Ic name="Plus" size={16} />Generar folio</button>,
+          <button key="new" className="btn btn--primary" onClick={() => showToast("Autorización visual preparada")}><Ic name="Plus" size={16} />Generar folio</button>,
         ]}
       />
 
@@ -162,7 +162,7 @@ function AccessScreen({ showToast }) {
             <div className="table-wrap">
               <table className="tbl">
                 <thead>
-                  <tr>{["Folio", "Visitante", "Unidad", "Tipo", "Vehiculo", "Vence", "Estado"].map((head) => <th key={head}>{head}</th>)}</tr>
+                  <tr>{["Folio", "Visitante", "Unidad", "Tipo", "Vehículo", "Vence", "Estado"].map((head) => <th key={head}>{head}</th>)}</tr>
                 </thead>
                 <tbody>
                   {D.VISITAS.map((visit) => {
@@ -184,7 +184,7 @@ function AccessScreen({ showToast }) {
             </div>
           </Card>
 
-          <Card title="Bitacora de caseta / hoy" icon="List" body={false}>
+          <Card title="Bitácora de caseta / hoy" icon="List" body={false}>
             <div style={{ padding: "6px 20px 16px" }}>
               <div className="timeline" style={{ marginTop: 10 }}>
                 {D.BITACORA.map((entry) => (
@@ -194,7 +194,7 @@ function AccessScreen({ showToast }) {
                     </span>
                     <div className="tl-body">
                       <div className="tl-title">{entry.evento}<span className="muted" style={{ fontWeight: 500, fontSize: 12 }}>{entry.hora}</span></div>
-                      <div className="tl-meta">{entry.detalle.replace("Codigo", "Folio")}</div>
+                      <div className="tl-meta">{entry.detalle.replace("Código", "Folio")}</div>
                     </div>
                   </div>
                 ))}
@@ -219,9 +219,9 @@ function AccessScreen({ showToast }) {
             <div className="kv-list" style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid var(--border)" }}>
               <div className="kv-row"><span className="kv-row__k">Folio</span><span className="kv-row__v mono">{selected.folio}</span></div>
               <div className="kv-row"><span className="kv-row__k">Vigencia</span><span className="kv-row__v">{selected.vence}</span></div>
-              <div className="kv-row"><span className="kv-row__k">Vehiculo</span><span className="kv-row__v mono">{selected.placa}</span></div>
+              <div className="kv-row"><span className="kv-row__k">Vehículo</span><span className="kv-row__v mono">{selected.placa}</span></div>
             </div>
-            <div className="status-tag" style={{ marginTop: 14 }}>Autorizacion manual</div>
+            <div className="status-tag" style={{ marginTop: 14 }}>Autorización manual</div>
           </Card>
 
           <Card title="Vista de vigilancia" icon="Shield" iconTone="slate">
@@ -273,7 +273,7 @@ function ReportsScreen({ showToast }) {
           {[
             ["Ingresos del mes", D.fmtMXN(k.cobrado), "+6.4%", "TrendingUp"],
             ["Egresos del mes", D.fmtMXN(k.egresos), "-2.1%", "TrendingDown"],
-            ["Resultado neto", D.fmtMXN(k.cobrado - k.egresos), "Superavit", "CheckCircle"],
+            ["Resultado neto", D.fmtMXN(k.cobrado - k.egresos), "Superávit", "CheckCircle"],
             ["Saldo operativo", D.fmtMXN(k.saldoOperativo), "Por revisar", "ShieldCheck"],
           ].map(([label, value, sub, icon], index) => (
             <div key={label} style={{ borderLeft: index ? "1px solid rgba(255,255,255,0.12)" : "none", paddingLeft: index ? 24 : 0 }}>
@@ -286,7 +286,7 @@ function ReportsScreen({ showToast }) {
       </div>
 
       <div className="grid-2">
-        <Card title="Egresos por categoria" sub="Junio 2026" icon="ChartPie">
+        <Card title="Egresos por categoría" sub="Junio 2026" icon="ChartPie">
           <div className="donut-wrap">
             <div style={{ position: "relative", width: 150, height: 150, borderRadius: "50%", background: donutGradient(D.EGRESOS) }}>
               <div style={{ position: "absolute", inset: 26, background: "var(--surface)", borderRadius: "50%", display: "grid", placeItems: "center", textAlign: "center" }}>
@@ -320,7 +320,7 @@ function ReportsScreen({ showToast }) {
       </div>
 
       <div className="grid-2">
-        <Card title="Gastos por categoria operativa" icon="Briefcase" body={false}>
+        <Card title="Gastos por categoría operativa" icon="Briefcase" body={false}>
           <div style={{ padding: "8px 6px" }}>
             {D.PROVEEDORES.map((item, index) => (
               <div key={item.nombre} style={{ padding: "11px 14px", borderBottom: index < D.PROVEEDORES.length - 1 ? "1px solid var(--border)" : "none" }}>
@@ -335,7 +335,7 @@ function ReportsScreen({ showToast }) {
         </Card>
 
         <div className="stack">
-          <Card title="Morosidad por antiguedad" icon="AlertTriangle" iconTone="red">
+          <Card title="Morosidad por antigüedad" icon="AlertTriangle" iconTone="red">
             <div className="kv-list">
               {D.MOROSIDAD_ANT.map((item) => (
                 <div key={item.rango} className="kv-row">
@@ -386,7 +386,7 @@ function SettingsScreen({ showToast }) {
       <div className="grid-2">
         {sectionCard("Datos de la comunidad", "Building2", (
           <div className="kv-list">
-            <div className="kv-row"><span className="kv-row__k">Nombre</span><span className="kv-row__v">Administracion Condo</span></div>
+            <div className="kv-row"><span className="kv-row__k">Nombre</span><span className="kv-row__v">Administración Condo</span></div>
             <div className="kv-row"><span className="kv-row__k">Comunidades</span><span className="kv-row__v">2 / 174 unidades</span></div>
             <div className="kv-row"><span className="kv-row__k">Moneda</span><span className="kv-row__v">MXN / Peso mexicano</span></div>
             <div className="kv-row"><span className="kv-row__k">Zona horaria</span><span className="kv-row__v">America/Mexico_City</span></div>
@@ -408,7 +408,7 @@ function SettingsScreen({ showToast }) {
             <div className="row row--between" style={{ padding: "12px 0 2px" }}>
               <div>
                 <div className="fw-600" style={{ fontSize: 13 }}>Recargo manual por mora</div>
-                <div className="muted" style={{ fontSize: 11.5 }}>$600 tras revision administrativa</div>
+                <div className="muted" style={{ fontSize: 11.5 }}>$600 tras revisión administrativa</div>
               </div>
               <button type="button" role="switch" aria-checked={switches.recargos} aria-label="Activar recargo manual por mora" className={`switch ${switches.recargos ? "switch--on" : ""}`} onClick={() => toggle("recargos")} />
             </div>
@@ -419,7 +419,7 @@ function SettingsScreen({ showToast }) {
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             {[
               ["Admin Condo", "Administrador", "teal"],
-              ["Comite Condo", "Comite", "sky"],
+              ["Comité Condo", "Comité", "sky"],
               ["Vigilancia Condo", "Vigilancia", "slate"],
               ["Residente 02", "Residente", "amber"],
             ].map(([name, role, tone], index) => (
@@ -432,9 +432,9 @@ function SettingsScreen({ showToast }) {
           </div>
         ))}
 
-        {sectionCard("Metodos de registro", "Wallet", (
+        {sectionCard("Métodos de registro", "Wallet", (
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {["Comprobante manual", "Deposito reportado", "Efectivo administracion"].map((method, index) => (
+            {["Comprobante manual", "Depósito reportado", "Efectivo administración"].map((method, index) => (
               <div key={method} className="row row--between" style={{ padding: "9px 0", borderBottom: index < 2 ? "1px solid var(--border)" : "none" }}>
                 <span className="row" style={{ gap: 9, fontSize: 13 }}>
                   <span className="icon-chip icon-chip--slate" style={{ width: 28, height: 28 }}><Ic name="Wallet" size={14} /></span>
@@ -446,12 +446,12 @@ function SettingsScreen({ showToast }) {
           </div>
         ))}
 
-        {sectionCard("Parametros operativos", "Bolt", (
+        {sectionCard("Parámetros operativos", "Bolt", (
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             {[
-              ["seguimiento", "Seguimiento de saldos", "Prepara avisos internos para revision"],
-              ["pronto", "Ajuste por pronto pago", "Visible como parametro administrativo"],
-              ["recargos", "Recargos por mora", "Registro manual sujeto a aprobacion"],
+              ["seguimiento", "Seguimiento de saldos", "Prepara avisos internos para revisión"],
+              ["pronto", "Ajuste por pronto pago", "Visible como parámetro administrativo"],
+              ["recargos", "Recargos por mora", "Registro manual sujeto a aprobación"],
             ].map(([key, label, hint], index) => (
               <div key={key} className="row row--between" style={{ padding: "11px 0", borderBottom: index < 2 ? "1px solid var(--border)" : "none" }}>
                 <div><div className="fw-600" style={{ fontSize: 13 }}>{label}</div><div className="muted" style={{ fontSize: 11.5 }}>{hint}</div></div>
@@ -465,7 +465,7 @@ function SettingsScreen({ showToast }) {
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <div className="banner banner--teal" style={{ fontSize: 12.5 }}>
               <span className="banner__icon"><Ic name="ShieldCheck" size={15} /></span>
-              <div><span className="fw-700">Datos ficticios. </span>Configuracion centralizada para la operacion visual de la comunidad.</div>
+              <div><span className="fw-700">Datos ficticios. </span>Configuración centralizada para la operación visual de la comunidad.</div>
             </div>
             <div className="row" style={{ gap: 8 }}>
               <button className="btn btn--secondary btn--block" onClick={() => showToast("Datos exportados")}><Ic name="Download" size={15} />Exportar datos</button>

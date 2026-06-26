@@ -6,11 +6,11 @@ import { useInView } from "../lib/useReveal.js";
 
 const noop = () => {};
 
-// Ancho de diseno al que renderiza la pantalla real antes de escalar.
+// Ancho de diseño al que renderiza la pantalla real antes de escalar.
 const DESIGN_WIDTH = 1280;
 
 // Contexto inerte: las pantallas reales se montan con handlers vacios
-// para que ningun modal/toast/navegacion dispare dentro del embed.
+// para que ningun modal/toast/navegación dispare dentro del embed.
 const INERT_CTX = {
   tenant: "all",
   route: "dashboard",
@@ -46,7 +46,7 @@ export default function LandingPreview({ screen = "dashboard", label }) {
     if (near) setMounted(true);
   }, [near]);
 
-  // Escala exacta = ancho del viewport / ancho de diseno (sin huecos laterales).
+  // Escala exacta = ancho del viewport / ancho de diseño (sin huecos laterales).
   useEffect(() => {
     if (!mounted) return;
     const node = viewportRef.current;

@@ -19,7 +19,7 @@ import {
 } from "../components/ui.jsx";
 
 const AMENITY_TONE = { optima: "sky", atencion: "amber", fuera: "red" };
-const AMENITY_LABEL = { optima: "En servicio", atencion: "Requiere atencion", fuera: "Fuera de servicio" };
+const AMENITY_LABEL = { optima: "En servicio", atencion: "Requiere atención", fuera: "Fuera de servicio" };
 
 function MapScreen({ tenant, setRoute, setDetail, showToast }) {
   const [localCommunity, setLocalCommunity] = useState(MAP_ORDER[0]);
@@ -267,7 +267,7 @@ function MapScreen({ tenant, setRoute, setDetail, showToast }) {
           <div className="map-canvas">
             {selected ? <button className="map-canvas__scrim" aria-label="Cerrar detalle" onClick={() => setSelected(null)} /> : null}
             <div className="map-stage">
-              <img className="map-photo" src={community.image} alt={`Mapa isometrico de ${community.name}`} draggable={false} />
+              <img className="map-photo" src={community.image} alt={`Mapa isométrico de ${community.name}`} draggable={false} />
               {community.hotspots.map((spot) => {
                 if (spot.tipo === "unit") return renderUnitPin(spot);
                 if (spot.tipo === "amenity") return overlays.amenidades ? renderBlockPin(spot) : null;

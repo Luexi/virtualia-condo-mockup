@@ -4,7 +4,7 @@ import { Ic } from "./ui.jsx";
 export default function EmptyState({
   icon = "FolderOpen",
   title = "Sin registros",
-  text = "No hay informacion para esta vista.",
+  text = "No hay información para esta vista.",
 }) {
   return (
     <div className="empty">
